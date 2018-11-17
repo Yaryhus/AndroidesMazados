@@ -42,6 +42,11 @@ public class BulletEnemy extends Sprite {
 
     }
 
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite collider) {
+
+    }
+
 
     public void init(Enemy parentPlayer, double initPositionX, double initPositionY) {
         positionX = initPositionX - imageWidth/2;

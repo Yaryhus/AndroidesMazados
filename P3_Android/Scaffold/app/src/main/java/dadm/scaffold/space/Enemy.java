@@ -87,6 +87,10 @@ public class Enemy extends Sprite {
         checkFiring(elapsedMillis, gameEngine);
     }
 
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite collider) {
+
+    }
 
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
