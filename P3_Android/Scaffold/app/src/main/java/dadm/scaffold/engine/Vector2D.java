@@ -1,3 +1,4 @@
+package dadm.scaffold.engine;
 
 public class Vector2D {
 	private double x,y;

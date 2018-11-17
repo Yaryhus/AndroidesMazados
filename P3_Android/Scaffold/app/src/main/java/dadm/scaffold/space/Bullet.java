@@ -12,7 +12,7 @@ public class Bullet extends Sprite {
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
-
+        typeS = "bullet";
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
@@ -22,7 +22,13 @@ public class Bullet extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         positionY += speedFactor * elapsedMillis;
-        if (positionY < -imageHeight) {
+
+        if (positionY < gameEngine.height) {
+            gameEngine.removeGameObject(this);
+            // And return it to the pool
+            parent.releaseBullet(this);
+        }
+        if (positionX < gameEngine.width) {
             gameEngine.removeGameObject(this);
             // And return it to the pool
             parent.releaseBullet(this);
@@ -34,5 +40,13 @@ public class Bullet extends Sprite {
         positionX = initPositionX - imageWidth/2;
         positionY = initPositionY - imageHeight/2;
         parent = parentPlayer;
+    }
+
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite collider) {
+
+        //Si no es otra bala, se destruye.
+        if(!collider.typeS.equals("bullet"))
+            gameEngine.removeGameObject(this);
     }
 }

@@ -15,6 +15,7 @@ import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
+import dadm.scaffold.input.BasicInputController;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.Asteroid;
 import dadm.scaffold.space.SpaceShipPlayer;
@@ -95,6 +96,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private void pauseGameAndShowPauseDialog() {
         theGameEngine.pauseGame();
+
+
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.pause_dialog_title)
                 .setMessage(R.string.pause_dialog_message)
@@ -116,11 +119,13 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
                         theGameEngine.resumeGame();
                     }
                 })
                 .create()
                 .show();
+
 
     }
 

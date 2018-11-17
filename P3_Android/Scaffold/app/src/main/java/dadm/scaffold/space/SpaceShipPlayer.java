@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class SpaceShipPlayer extends Sprite {
     List<Bullet> bullets = new ArrayList<Bullet>();
     private long timeSinceLastFire;
 
+    private int HP;
     private int maxX;
     private int maxY;
     private double speedFactor;
@@ -25,7 +28,8 @@ public class SpaceShipPlayer extends Sprite {
         speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;
-
+        typeS = "player";
+        HP = 10;
         initBulletPool(gameEngine);
     }
 
@@ -58,6 +62,16 @@ public class SpaceShipPlayer extends Sprite {
         // Get the info from the inputController
         updatePosition(elapsedMillis, gameEngine.theInputController);
         checkFiring(elapsedMillis, gameEngine);
+
+        Log.d("Ship","Nave vuela por "+positionX+" , "+positionY);
+    }
+
+    //Si colisiona con algo pierde vida
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite collider) {
+
+        HP-=1;
+
     }
 
     private void updatePosition(long elapsedMillis, InputController inputController) {

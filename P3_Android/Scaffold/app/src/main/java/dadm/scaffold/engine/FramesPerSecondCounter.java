@@ -48,4 +48,10 @@ public class FramesPerSecondCounter extends GameObject {
         canvas.drawText(framesPerSecondText, textWidth / 2, (int) (canvas.getHeight() - textHeight / 2), paint);
         draws++;
     }
+
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite other) {
+        //Do nothing
+    }
+
 }

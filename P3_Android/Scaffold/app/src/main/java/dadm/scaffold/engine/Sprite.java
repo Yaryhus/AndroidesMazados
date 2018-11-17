@@ -15,6 +15,8 @@ public abstract class Sprite extends GameObject {
 
     protected double pixelFactor;
 
+    public String typeS;
+
     private final Bitmap bitmap;
     protected final int imageHeight;
     protected final int imageWidth;
@@ -27,10 +29,14 @@ public abstract class Sprite extends GameObject {
 
         this.pixelFactor = gameEngine.pixelFactor;
 
+        //Tipo sprite
+        typeGO = "sprite";
+
         this.imageHeight = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
         this.imageWidth = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
+
     }
 
     @Override

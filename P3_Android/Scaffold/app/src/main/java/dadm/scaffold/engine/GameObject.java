@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 
 public abstract class GameObject {
 
+    public String typeGO;
+
     public abstract void startGame();
 
     public abstract void onUpdate(long elapsedMillis, GameEngine gameEngine);
@@ -30,6 +32,6 @@ public abstract class GameObject {
     public void onRemovedFromGameUiThread(){
     }
 
-    //public abstract void onCollision();
+    public abstract void onCollision(GameEngine gameEngine, Sprite collider);
 
 }

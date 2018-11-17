@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import dadm.scaffold.R;
@@ -9,6 +11,7 @@ import dadm.scaffold.engine.Sprite;
 public class Asteroid extends Sprite {
 
     private double speedFactor;
+
 
     private int maxX;
     private int maxY;
@@ -20,6 +23,8 @@ public class Asteroid extends Sprite {
 
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;
+
+        typeS = "asteroid";
 
         //randoms para posiciones y velocidades
         rnd1 = rnd.nextInt(10+1+10)-10;
@@ -63,6 +68,26 @@ public class Asteroid extends Sprite {
         }
     }
 
+    @Override
+    public void onCollision(GameEngine gameEngine, Sprite collider) {
+
+        Log.d("OnColission_Asteroide","He colisionado");
+
+        //Si colisiona con un asteroide o enemigo, rebota
+        if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy")) {
+            Ricochet();
+        }
+        else {
+            gameEngine.removeGameObject(this);
+        }
+    }
+
+    //Rebote
+    public void Ricochet()
+    {
+        rnd1 = -rnd1;
+        rnd2 = -rnd2;
+    }
 
     public void init(double initPositionX, double initPositionY) {
         positionX = initPositionX - imageWidth/2;
