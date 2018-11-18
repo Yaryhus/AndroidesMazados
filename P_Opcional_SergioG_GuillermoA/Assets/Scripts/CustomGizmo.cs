@@ -17,7 +17,6 @@ public class CustomGizmo : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        // Draw a yellow sphere at the transform's position
 
         Gizmos.color = color;
         Gizmos.DrawCube(transform.position, this.GetComponent<Collider>().bounds.size);

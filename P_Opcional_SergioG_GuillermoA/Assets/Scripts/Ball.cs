@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
+
+
+[RequireComponent(typeof(Rigidbody))]
+
 public class Ball : MonoBehaviour, ITrackableEventHandler
 {
+
 
     private TrackableBehaviour mTrackableBehaviour;
 
@@ -34,7 +39,7 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     void Update () {
 
         //Guardamos la posicion de la pelota
-        savedBallposition = transform.position;
+        //savedBallposition = transform.position;
 
         //Si se saliese del mapa
         if (transform.position.y < Floor.transform.position.y - 10)
@@ -59,19 +64,24 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     }
     private void OnTrackingFound()
     {
-        transform.position = Spawn.transform.position;
+        //La colocamos donde la recordamos por ultima vez
         //transform.position = savedBallposition;
+        transform.position = Spawn.transform.position;
+
+
     }
 
 
     public void resetBall()
     {
+        //Reseteamos posicion y booleano de ganar
         Scored = false;
         transform.position = Spawn.transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.tag == "Exit")
             Scored = true;
     }

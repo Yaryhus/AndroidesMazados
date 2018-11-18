@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class PuzzleGenerator : MonoBehaviour, ITrackableEventHandler
+public class PuzzleGenerator : DefaultTrackableEventHandler
 {
 
     public GameObject[] maps;
@@ -25,7 +25,16 @@ public class PuzzleGenerator : MonoBehaviour, ITrackableEventHandler
         {
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
         }
-        Debug.Log("He creado cosas");
+
+        Debug.Log("Creando un mapa");
+
+            //Recuperamos la posicion de la bola
+            ball.transform.position = savedBallposition;
+
+            //Creamos mapa aleatorio
+            ActualMap = returnRandom();
+            Instantiate(ActualMap,this.transform);
+            ActualMap.SetActive(false);
 
     }
 
@@ -35,53 +44,70 @@ public class PuzzleGenerator : MonoBehaviour, ITrackableEventHandler
 
         // Si la bola ha llegado a su meta
         if (ball.transform.GetComponent<Ball>().Scored) {
-
+            ActualMap.SetActive(false);
             //Creamos un mapa aleatorio y recargamos la pelota.
             OldMap = ActualMap;
             ActualMap = returnRandom();
-            //Borramos el mapa antiguo
-            Destroy(OldMap, 0);
+            //Hacemos invisible el mapa antiguo
+            OldMap.SetActive(false);
+            //Destroy(OldMap);
             //Creamos mapa nuevo
-            Instantiate(ActualMap);
+            //Instantiate(ActualMap,OldMap.transform.position,OldMap.transform.rotation,this.transform);
+            ActualMap.SetActive(true);
+
+            //Instantiate(ActualMap, this.transform);
             //Reseteamos la bola
             ball.transform.GetComponent<Ball>().resetBall();     
         }
 		
 	}
 
-    public void OnTrackableStateChanged(
-          TrackableBehaviour.Status previousStatus,
+    
+    public new void OnTrackableStateChanged(
+         TrackableBehaviour.Status previousStatus,
           TrackableBehaviour.Status newStatus)
     {
-        if (newStatus == TrackableBehaviour.Status.DETECTED ||
-            newStatus == TrackableBehaviour.Status.TRACKED)
-        {
-            Debug.Log("He encontrado trackeo!");
-
-            OnTrackingFound();
-        }
-    }
-
-    private void OnTrackingFound()
+        
+     if (newStatus == TrackableBehaviour.Status.DETECTED ||
+            newStatus == TrackableBehaviour.Status.TRACKED ||
+            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
     {
-        if (ball.transform.GetComponent<Ball>().Scored)
+        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+        OnTrackingFound();
+    }
+        else if (previousStatus == TrackableBehaviour.Status.TRACKED &&
+                 newStatus == TrackableBehaviour.Status.NO_POSE)
         {
-            Debug.Log("Creando un mapa");
-
-            //Recuperamos la posicion de la bola
-            ball.transform.position = savedBallposition;
-
-            //Creamos mapa aleatorio
-            ActualMap = returnRandom();
-            Instantiate(ActualMap);
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            OnTrackingLost();
+}
+        else
+        {
+            // For combo of previousStatus=UNKNOWN + newStatus=UNKNOWN|NOT_FOUND
+            // Vuforia is starting, but tracking has not been lost or found yet
+            // Call OnTrackingLost() to hide the augmentations
+            OnTrackingLost();
         }
+
     }
 
- 
+
+
+    public override void OnTrackingFound()
+    {
+        base.OnTrackingFound();
+
+        ActualMap.SetActive(true);
+        
+    }
+
+    protected void OnTrackingLost()
+    {
+    }
 
     public GameObject returnRandom()
     {
-        int i = Random.Range(maps.Length,0);      
+        int i = Random.Range(0,maps.Length);      
         return maps[i];
 
     }
