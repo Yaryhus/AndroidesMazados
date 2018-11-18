@@ -460,19 +460,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.707108
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.70710564
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_RootOrder
@@ -491,6 +491,32 @@ Prefab:
     - target: {fileID: 1082051715586896, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663883745434938, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 54780533881295388, guid: fc189bba8f89f214695e084e32d86e2e,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 64266609221795360, guid: fc189bba8f89f214695e084e32d86e2e,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ba92fb44336020f40bdf294bb66bc9da,
+        type: 2}
+    - target: {fileID: 64312799053171380, guid: fc189bba8f89f214695e084e32d86e2e,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ba92fb44336020f40bdf294bb66bc9da,
+        type: 2}
+    - target: {fileID: 54780533881295388, guid: fc189bba8f89f214695e084e32d86e2e,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc189bba8f89f214695e084e32d86e2e, type: 2}
@@ -986,6 +1012,12 @@ Prefab:
       propertyPath: m_Name
       value: ColisionTecho
       objectReference: {fileID: 0}
+    - target: {fileID: 64766499669875750, guid: 6d5b4605785ef794199901d46e31e561,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ba92fb44336020f40bdf294bb66bc9da,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
   m_IsPrefabAsset: 0

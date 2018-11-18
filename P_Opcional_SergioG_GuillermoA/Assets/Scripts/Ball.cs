@@ -19,10 +19,13 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     public bool Scored = false;
 
     Vector3 savedBallposition;
-
+    Rigidbody rb;
 
     // Use this for initialization
     void Start () {
+
+        //Aumentamos la velocidad de caida de la ficha.
+        rb=this.GetComponent<Rigidbody>();
 
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 
@@ -40,6 +43,8 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
         //Guardamos la posicion de la pelota
         //savedBallposition = transform.position;
+
+        rb.velocity += new Vector3(0, -5, 0);
 
         //Si se saliese del mapa
         if (transform.position.y < Floor.transform.position.y - 10)
