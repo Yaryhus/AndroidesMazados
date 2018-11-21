@@ -15,7 +15,7 @@ public class BulletEnemy extends Sprite {
 
     public BulletEnemy(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
-
+        typeS = "bulletenemy";
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 

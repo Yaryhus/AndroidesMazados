@@ -21,22 +21,29 @@ public class Enemy extends Sprite {
     private double speedFactor;
 
     Random rnd = new Random();
-    int rnd1,rnd2;
 
 
+    private final double mSpeed = 10;
+    private double mSpeedX;
+    private double mSpeedY;
 
     public Enemy(GameEngine gameEngine){
         super(gameEngine, R.drawable.ship);
 
-        maxX = gameEngine.width - imageWidth;
-        maxY = gameEngine.height - imageHeight;
+        typeS = "enemy";
 
-        //randoms para posiciones y velocidades
-        rnd1 = rnd.nextInt(10+1+10)-10;
-        rnd2 = rnd.nextInt(10+1+10)-10;
 
-        //Velocidad
-        speedFactor = gameEngine.pixelFactor * -3d / 100d;
+            // They initialize in a [-30, 30] degrees angle
+            double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
+            mSpeedX = mSpeed * Math.sin(angle);
+            mSpeedY = mSpeed * Math.cos(angle);
+
+
+        // Asteroids initialize in the central 50% of the screen
+        positionX = rnd.nextInt(gameEngine.width/2)+
+                gameEngine.width/4;
+        // They initialize outside of the screen vertically
+        positionY = -imageHeight;
 
 
         initBulletPool(gameEngine);
@@ -62,8 +69,7 @@ public class Enemy extends Sprite {
 
     @Override
     public void startGame() {
-        positionX = rnd.nextInt(maxX);
-        positionY  = rnd.nextInt(maxY);
+
     }
 
     @Override

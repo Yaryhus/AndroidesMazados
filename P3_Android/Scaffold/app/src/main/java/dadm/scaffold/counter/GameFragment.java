@@ -19,6 +19,7 @@ import dadm.scaffold.input.BasicInputController;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.Asteroid;
 import dadm.scaffold.space.Enemy;
+import dadm.scaffold.space.EnemySpawner;
 import dadm.scaffold.space.SpaceShipPlayer;
 
 
@@ -50,7 +51,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
-                theGameEngine.addGameObject(new Enemy(theGameEngine));
+                theGameEngine.addGameObject(new EnemySpawner(theGameEngine));
                 asteroides();
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.startGame();
