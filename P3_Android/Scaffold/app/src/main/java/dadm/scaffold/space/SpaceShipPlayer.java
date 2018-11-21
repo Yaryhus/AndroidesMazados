@@ -12,7 +12,7 @@ import dadm.scaffold.input.InputController;
 
 public class SpaceShipPlayer extends Sprite {
 
-    private static final int INITIAL_BULLET_POOL_AMOUNT = 6;
+    private static final int INITIAL_BULLET_POOL_AMOUNT = 8;
     private static final long TIME_BETWEEN_BULLETS = 250;
     List<Bullet> bullets = new ArrayList<Bullet>();
     private long timeSinceLastFire;
@@ -63,7 +63,7 @@ public class SpaceShipPlayer extends Sprite {
         updatePosition(elapsedMillis, gameEngine.theInputController);
         checkFiring(elapsedMillis, gameEngine);
 
-        Log.d("Ship","Nave vuela por "+positionX+" , "+positionY);
+        //Log.d("Ship","Nave vuela por "+positionX+" , "+positionY);
     }
 
     //Si colisiona con algo pierde vida

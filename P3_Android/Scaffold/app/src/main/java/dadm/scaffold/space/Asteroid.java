@@ -57,14 +57,30 @@ public class Asteroid extends Sprite {
         positionX += rnd2 * speedFactor * elapsedMillis;
 
         if (positionY < -imageHeight) {
-            gameEngine.removeGameObject(this);
+            Ricochet();
+            //gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX < -imageWidth) {
-            gameEngine.removeGameObject(this);
+            Ricochet();
+            // gameEngine.removeGameObject(this);
+            // And return it to the pool
+            //
+
+        }
+        if (positionY > imageHeight) {
+            Ricochet();
+            //gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
+        }
+        if (positionX > imageWidth) {
+            Ricochet();
+            // gameEngine.removeGameObject(this);
+            // And return it to the pool
+            //
+
         }
     }
 
@@ -74,7 +90,7 @@ public class Asteroid extends Sprite {
         Log.d("OnColission_Asteroide","He colisionado");
 
         //Si colisiona con un asteroide o enemigo, rebota
-        if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy")) {
+        if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy") ) {
             Ricochet();
         }
         else {

@@ -15,6 +15,7 @@ public class BulletEnemy extends Sprite {
 
     public BulletEnemy(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
+        typeS = "bulletenemy";
 
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
@@ -44,6 +45,7 @@ public class BulletEnemy extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
+        gameEngine.removeGameObject(this);
 
     }
 
