@@ -2,6 +2,7 @@ package dadm.scaffold.space;
 
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
+import dadm.scaffold.engine.GameEvent;
 import dadm.scaffold.engine.Sprite;
 
 public class Bullet extends Sprite {
@@ -49,7 +50,9 @@ public class Bullet extends Sprite {
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
         //Si no es otra bala, se destruye.
-        if(!collider.typeS.equals("bullet"))
+        if(!collider.typeS.equals("bullet")) {
             gameEngine.removeGameObject(this);
+            gameEngine.onGameEvent(GameEvent.AsteroidHit);
+        }
     }
 }

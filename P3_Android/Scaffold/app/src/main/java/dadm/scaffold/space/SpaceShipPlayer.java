@@ -7,6 +7,7 @@ import java.util.List;
 
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
+import dadm.scaffold.engine.GameEvent;
 import dadm.scaffold.engine.Sprite;
 import dadm.scaffold.input.InputController;
 
@@ -70,6 +71,7 @@ public class SpaceShipPlayer extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
+        gameEngine.onGameEvent(GameEvent.SpaceshipHit);
         HP-=1;
 
     }
@@ -100,6 +102,7 @@ public class SpaceShipPlayer extends Sprite {
             bullet.init(this, positionX + imageWidth/2, positionY);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
+            gameEngine.onGameEvent(GameEvent.LaserFired);
         }
         else {
             timeSinceLastFire += elapsedMillis;

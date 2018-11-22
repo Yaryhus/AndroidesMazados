@@ -17,6 +17,7 @@ public class GameEngine {
     private List<GameObject> objectsToAdd = new ArrayList<GameObject>();
     private List<GameObject> objectsToRemove = new ArrayList<GameObject>();
 
+    private SoundManager mSoundManager;
     private UpdateThread theUpdateThread;
     private DrawThread theDrawThread;
     public InputController theInputController;
@@ -40,7 +41,7 @@ public class GameEngine {
 
         this.pixelFactor = this.height / 400d;
 
-
+        mSoundManager = new SoundManager(this.getContext());
     }
 
     public void setTheInputController(InputController inputController) {
@@ -141,32 +142,12 @@ public class GameEngine {
         Sprite aa, bb;
 
         //Si el GameObject es de tipo sprite
-            //if((b instanceof Sprite )){
             if(b.typeGO != null && a.typeGO != null && a.typeGO.equals("sprite") && b.typeGO.equals("sprite")){
             aa = (Sprite) a;
             bb = (Sprite) b;
 
-            //Calculamos si colisionan
-/*
-            if (Math.abs(aa.positionX + aa.imageWidth/2 - bb.positionX + bb.imageWidth/2)<=(aa.imageWidth + bb.imageWidth)/2f
-                    && Math.abs(aa.positionY + aa.imageHeight/2 - bb.positionY + bb.imageHeight/2)<=(aa.imageHeight+bb.imageHeight)/2f)
-*/
-                //Esquina sup dcha, sup izqda, inf derecha e inf izq. Centro
-                // bb.positionY + bb.imageHeight
-                // bb.positionY - bb.imageHeight
-                // bb.positionX + bb.imageWidth
-                // bb.positionX - bb.imageWidth
-                // bb.positionX + bb.imageWidth/2 , bb.positionY + bb.imageHeight/2
-
-                /*
-                if(-bb.positionY <= -aa.positionY - aa.imageHeight/2 &&
-                        -bb.positionY - bb.imageHeight >= aa.positionY    &&
-                        -bb.positionX - bb.imageWidth >= aa.positionX &&
-                        bb.positionX <= -aa.positionX - aa.imageWidth)
-                //*/
                 if(aa.col!=null && bb.col!=null && Rect.intersects(aa.col,bb.col))
                 {
-                    Log.d("AuxilioMeDesmayo", "Detectada colision entre" + a + " y " + b);
 
                     //Ejecutamos sus métodos de colision
                     a.onCollision(this,bb);
@@ -185,6 +166,13 @@ public class GameEngine {
     }
 
 
+    public void onGameEvent (GameEvent gameEvent) {
+        for(int i=0; i<gameObjects.size(); i++)
+        {
+            mSoundManager.playSoundForGameEvent(gameEvent);
+
+        }
+    }
 
 
     public void onDraw() {
