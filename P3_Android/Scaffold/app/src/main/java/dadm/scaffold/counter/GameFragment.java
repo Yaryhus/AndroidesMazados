@@ -1,7 +1,11 @@
 package dadm.scaffold.counter;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.hardware.input.InputManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import dadm.scaffold.BaseFragment;
+import dadm.scaffold.EndGame;
 import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.engine.FramesPerSecondCounter;
@@ -99,6 +104,20 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         return false;
     }
 
+    //Vamos a la pantalla de final.
+    public void onGameFinished()
+    {
+        Intent intent = new Intent(getContext(), EndGame.class);
+
+        //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
+        String[] finJuego = {"limbo","-99999","0"};
+
+        //Mandamos el paquete
+        intent.putExtra("finJuego",finJuego);
+
+        startActivity(intent);
+    }
+
     private void pauseGameAndShowPauseDialog() {
         theGameEngine.pauseGame();
 
@@ -133,6 +152,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
 
     }
+
 
     private void playOrPause() {
         Button button = (Button) getView().findViewById(R.id.btn_play_pause);

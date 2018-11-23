@@ -2,13 +2,16 @@ package dadm.scaffold.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dadm.scaffold.EndGame;
 import dadm.scaffold.input.InputController;
+import dadm.scaffold.space.SpaceShipPlayer;
 
 public class GameEngine {
 
@@ -85,6 +88,8 @@ public class GameEngine {
         }
     }
 
+
+
     public void resumeGame() {
         if (theUpdateThread != null) {
             theUpdateThread.resumeGame();
@@ -132,7 +137,60 @@ public class GameEngine {
             }
 
         }
+        hasGameFinished();
+    }
 
+    public void hasGameFinished()
+    {
+        if(getPlayer().getScore() == 10)
+            EndState(true);
+
+        else if(getPlayer().getHP() <=0)
+            EndState(false);
+    }
+
+
+    public void EndState(boolean win){
+
+        stopGame();
+        if(win){
+            Intent intent = new Intent(getContext(), EndGame.class);
+
+            //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
+            String[] finJuego = {"true",Integer.toString(getPlayer().getScore())};
+
+            //Mandamos el paquete
+            intent.putExtra("finJuego",finJuego);
+
+            mainActivity.startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(getContext(), EndGame.class);
+
+            //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
+            String[] finJuego = {"false",Integer.toString(getPlayer().getScore())};
+
+            //Mandamos el paquete
+            intent.putExtra("finJuego",finJuego);
+
+            mainActivity.startActivity(intent);
+
+        }
+
+    }
+
+
+    public SpaceShipPlayer getPlayer()
+    {
+        for(int i=0;i<gameObjects.size();i++){
+            if(gameObjects.get(i).typeGO.equals("sprite")) {
+                Sprite p = (Sprite) gameObjects.get(i);
+                if(p.typeS.equals("player"))
+                    return (SpaceShipPlayer) p;
+            }
+        }
+        //no se deberia llamar nunca
+        return null;
     }
 
     //Detectamos colisiones entre dos objetos, a y b. Gracias a sus Sprites, que tienen las dimensiones.

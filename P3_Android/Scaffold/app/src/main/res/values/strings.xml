@@ -14,4 +14,8 @@
     <string name="music_off">Music off</string>
     <string name="sound_off">Sound off</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_end_game">EndGame</string>
+
 </resources>

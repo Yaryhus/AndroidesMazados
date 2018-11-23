@@ -19,12 +19,13 @@ public class SpaceShipPlayer extends Sprite {
     private long timeSinceLastFire;
 
     private int HP;
+    private int score;
     private int maxX;
     private int maxY;
     private double speedFactor;
 
 
-    public SpaceShipPlayer(GameEngine gameEngine){
+    public SpaceShipPlayer(GameEngine gameEngine) {
         super(gameEngine, R.drawable.ship);
         speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - imageWidth;
@@ -32,6 +33,26 @@ public class SpaceShipPlayer extends Sprite {
         typeS = "player";
         HP = 10;
         initBulletPool(gameEngine);
+    }
+
+    public int getHP()
+    {
+        return HP;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void setScore(int score)
+    {
+        this.score=score;
+    }
+
+    public void setHP(int hp)
+    {
+        this.HP=hp;
     }
 
     private void initBulletPool(GameEngine gameEngine) {
@@ -71,8 +92,10 @@ public class SpaceShipPlayer extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
-        gameEngine.onGameEvent(GameEvent.SpaceshipHit);
-        HP-=1;
+        if(!collider.typeS.equals("bullet")){
+            gameEngine.onGameEvent(GameEvent.SpaceshipHit);
+            HP-=1;
+        }
 
     }
 

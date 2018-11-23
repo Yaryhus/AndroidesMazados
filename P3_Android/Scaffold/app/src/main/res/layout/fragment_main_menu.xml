@@ -19,7 +19,7 @@
         android:text="@string/start" />
 
     <Button
-        android:id="@+id/btn_sound"
+        android:id="@+id/TryAgain"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:id="@+id/btn_music"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_sound"
-        android:layout_toLeftOf="@+id/btn_sound"
+        android:layout_alignBottom="@+id/TryAgain"
+        android:layout_toLeftOf="@+id/TryAgain"
         android:text="@string/music_on" />
 </RelativeLayout>

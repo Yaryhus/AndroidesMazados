@@ -1,10 +1,6 @@
 package dadm.scaffold.counter;
 
-import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +28,7 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_start).setOnClickListener(this);
-        view.findViewById(R.id.btn_sound).setOnClickListener(this);
+        view.findViewById(R.id.TryAgain).setOnClickListener(this);
         view.findViewById(R.id.btn_music).setOnClickListener(this);
         updateSoundAndMusicButtons();
     }
@@ -48,7 +44,7 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
                 soundManager.toggleMusicStatus();
                 updateSoundAndMusicButtons();
             }
-            else if (v.getId() == R.id.btn_sound) {
+            else if (v.getId() == R.id.TryAgain) {
                 SoundManager soundManager =
                         ((ScaffoldActivity) getActivity()).getSoundManager();
                 soundManager.toggleSoundStatus();
@@ -67,7 +63,7 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
         btnMusic.setText(R.string.music_off);
         }
             TextView btnSounds= (TextView)
-                    getView().findViewById(R.id.btn_sound);
+                    getView().findViewById(R.id.TryAgain);
         if (soundManager.getSoundStatus()) {
                 btnSounds.setText(R.string.sound_on);
             }
