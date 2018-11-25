@@ -30,7 +30,7 @@ public class Enemy extends Sprite {
     private double mSpeedY;
 
     public Enemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.ship);
+        super(gameEngine, R.drawable.s_fish);
 
         typeS = "enemy";
 

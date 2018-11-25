@@ -16,7 +16,7 @@ public class SpaceShipPlayer extends Sprite {
     private static final int INITIAL_BULLET_POOL_AMOUNT = 50;
     private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 80;
 
-    private static final long TIME_BETWEEN_BULLETS = 250;
+    private static final long TIME_BETWEEN_BULLETS = 800;
     private static final long TIME_BETWEEN_AUTOBULLETS = 550;
 
     List<Bullet> bullets = new ArrayList<Bullet>();
@@ -32,7 +32,7 @@ public class SpaceShipPlayer extends Sprite {
 
 
     public SpaceShipPlayer(GameEngine gameEngine) {
-        super(gameEngine, R.drawable.ship);
+        super(gameEngine, R.drawable.s_duck_a);
         speedFactor = pixelFactor * 100d / 500d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;

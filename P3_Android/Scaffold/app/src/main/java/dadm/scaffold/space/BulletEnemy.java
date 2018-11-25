@@ -17,7 +17,7 @@ public class BulletEnemy extends Sprite {
     double speedX, speedY;
 
     public BulletEnemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.bullet);
+        super(gameEngine, R.drawable.s_drop);
         typeS = "bulletenemy";
 
         double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;

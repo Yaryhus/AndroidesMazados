@@ -21,7 +21,7 @@ public class Asteroid extends Sprite {
     double speedY;
 
     public Asteroid(GameEngine gameEngine){
-        super(gameEngine, R.drawable.robot);
+        super(gameEngine, R.drawable.s_bread);
 
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;
@@ -108,7 +108,7 @@ public class Asteroid extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
-        Log.d("OnColission_Asteroide","He colisionado");
+        //Log.d("OnColission_Asteroide","He colisionado");
 
         //Si colisiona con un asteroide o enemigo, rebota
         if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy") ) {
