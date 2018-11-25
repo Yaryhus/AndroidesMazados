@@ -1,23 +1,31 @@
 package dadm.scaffold.space;
 
+import java.util.Random;
+
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.Sprite;
 
 public class BulletEnemy extends Sprite {
 
-    private double speedFactor;
+    private double speedFactor = 1;
 
     private Enemy parent;
 
-    int rnd1,rnd2;
+    Random rnd = new Random();
 
+    double speedX, speedY;
 
     public BulletEnemy(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
         typeS = "bulletenemy";
 
-        speedFactor = gameEngine.pixelFactor * -300d / 1000d;
+        double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
+        speedX = speedFactor * Math.sin(angle);
+        speedY = speedFactor * Math.cos(angle);
+
+
+      //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
     @Override
@@ -26,8 +34,8 @@ public class BulletEnemy extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-        positionY += speedFactor * elapsedMillis;
-        positionX += speedFactor * elapsedMillis;
+        positionY += speedY * elapsedMillis;
+        positionX += speedX * elapsedMillis;
 
         if (positionY < -imageHeight) {
             gameEngine.removeGameObject(this);

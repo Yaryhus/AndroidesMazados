@@ -6,7 +6,6 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-import java.util.regex.Matcher;
 
 public class ParallaxBackground extends GameObject {
 
@@ -26,7 +25,7 @@ public class ParallaxBackground extends GameObject {
 
     double targetWidth;
 
-    double positionY = 5;
+    double positionY = 0;
 
 
 
@@ -54,7 +53,7 @@ public class ParallaxBackground extends GameObject {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-         positionY += speedY;
+         positionY += speedY*elapsedMillis;
     }
 
     @Override
@@ -81,6 +80,7 @@ public class ParallaxBackground extends GameObject {
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
     }
+
     /*
     private void efficientDraw(Canvas canvas) {
         if (positionY < 0) {

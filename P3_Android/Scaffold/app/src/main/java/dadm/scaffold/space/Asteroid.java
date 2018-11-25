@@ -10,13 +10,15 @@ import dadm.scaffold.engine.Sprite;
 
 public class Asteroid extends Sprite {
 
-    private double speedFactor;
+    private double speedFactor = 1;
 
 
     private int maxX;
     private int maxY;
     Random rnd = new Random();
     int rnd1,rnd2;
+    double speedX;
+    double speedY;
 
     public Asteroid(GameEngine gameEngine){
         super(gameEngine, R.drawable.robot);
@@ -26,18 +28,36 @@ public class Asteroid extends Sprite {
 
         typeS = "asteroid";
 
+
+        //speedFactor = gameEngine.pixelFactor * -3d / 100d;
+        // They initialize in a [-30, 30] degrees angle
+        double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
+        speedX = speedFactor * Math.sin(angle);
+        speedY = speedFactor * Math.cos(angle);
+
+
+        // Asteroids initialize in the central 50% of the screen
+        positionX = rnd.nextInt(gameEngine.width/2)+
+                gameEngine.width/4;
+        // They initialize outside of the screen vertically
+        positionY = -imageHeight;
+/*
         //randoms para posiciones y velocidades
         rnd1 = rnd.nextInt(10+1+10)-10;
         rnd2 = rnd.nextInt(10+1+10)-10;
 
         //Velocidad
         speedFactor = gameEngine.pixelFactor * -3d / 100d;
+
+        */
     }
 
     @Override
     public void startGame() {
-        positionX = rnd.nextInt(maxX);
-        positionY  = rnd.nextInt(maxY);
+      //  positionX = rnd.nextInt(maxX);
+     //   positionY  = rnd.nextInt(maxY);
+
+
         //positionX = gameEngine.height / 2;
         //positionY = maxY / 2;
     }
@@ -53,8 +73,8 @@ public class Asteroid extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-        positionY += rnd1 * speedFactor * elapsedMillis;
-        positionX += rnd2 * speedFactor * elapsedMillis;
+        positionY += speedY*elapsedMillis;
+        positionX += speedX*elapsedMillis;
 
         if (positionY < -imageHeight) {
             Ricochet();
@@ -69,19 +89,20 @@ public class Asteroid extends Sprite {
             //
 
         }
-        if (positionY > imageHeight) {
+        if (positionY > gameEngine.height) {
             Ricochet();
             //gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
-        if (positionX > imageWidth) {
+        if (positionX > gameEngine.width) {
             Ricochet();
             // gameEngine.removeGameObject(this);
             // And return it to the pool
             //
 
         }
+
     }
 
     @Override
@@ -101,8 +122,8 @@ public class Asteroid extends Sprite {
     //Rebote
     public void Ricochet()
     {
-        rnd1 = -rnd1;
-        rnd2 = -rnd2;
+        speedX = -speedX;
+        speedY = -speedY;
     }
 
     public void init(double initPositionX, double initPositionY) {

@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.graphics.Canvas;
+
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +9,15 @@ import java.util.Random;
 
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
+import dadm.scaffold.engine.GameObject;
 import dadm.scaffold.engine.Sprite;
 
-public class EnemySpawner extends Sprite {
+public class EnemySpawner extends GameObject {
 
 
 
     private static final int INITIAL_ENEMY_POOL_AMOUNT = 6;
-    private static final long TIME_BETWEEN_ENEMIES = 250;
+    private static final long TIME_BETWEEN_ENEMIES = 2000;
     List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
     private long timeSinceLastFire;
     int mEnemiesSpawned;
@@ -23,8 +26,8 @@ public class EnemySpawner extends Sprite {
 
 
     public EnemySpawner(GameEngine gameEngine){
-        super(gameEngine, R.drawable.ship);
-        typeS = "none";
+     //   super(gameEngine, R.drawable.ship);
+       // typeS = "none";
 
     }
 
@@ -44,6 +47,11 @@ public class EnemySpawner extends Sprite {
 
             mCurrentMillis = 0;
         }
+    }
+
+    @Override
+    public void onDraw(Canvas canvas) {
+
     }
 
     @Override

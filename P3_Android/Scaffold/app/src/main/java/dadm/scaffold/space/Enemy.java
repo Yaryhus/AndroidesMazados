@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,7 +25,7 @@ public class Enemy extends Sprite {
     Random rnd = new Random();
 
 
-    private final double mSpeed = 10;
+    private final double mSpeed = 0.1;
     private double mSpeedX;
     private double mSpeedY;
 
@@ -75,8 +77,8 @@ public class Enemy extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-        positionY += speedFactor * elapsedMillis;
-        positionX += speedFactor * elapsedMillis;
+        positionY += mSpeedY * elapsedMillis;
+        positionX += mSpeedX * elapsedMillis;
 
         if (positionY < -imageHeight) {
             gameEngine.removeGameObject(this);
@@ -95,7 +97,13 @@ public class Enemy extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
-        gameEngine.removeGameObject(this);
+
+
+        //Si colisiona con una bala
+        if(collider.typeS.equals("bullet")) {
+
+            gameEngine.removeGameObject(this);
+        }
     }
 
 
