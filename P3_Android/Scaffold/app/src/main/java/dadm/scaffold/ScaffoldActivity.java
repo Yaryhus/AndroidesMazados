@@ -26,6 +26,8 @@ public class ScaffoldActivity extends AppCompatActivity {
         }
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mSoundManager = new SoundManager(getApplicationContext());
+
+
     }
 
     public SoundManager getSoundManager() {

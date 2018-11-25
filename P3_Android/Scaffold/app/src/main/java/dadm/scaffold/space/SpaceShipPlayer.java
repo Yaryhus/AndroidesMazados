@@ -13,9 +13,15 @@ import dadm.scaffold.input.InputController;
 
 public class SpaceShipPlayer extends Sprite {
 
-    private static final int INITIAL_BULLET_POOL_AMOUNT = 8;
+    private static final int INITIAL_BULLET_POOL_AMOUNT = 50;
+    private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 80;
+
     private static final long TIME_BETWEEN_BULLETS = 250;
+    private static final long TIME_BETWEEN_AUTOBULLETS = 550;
+
     List<Bullet> bullets = new ArrayList<Bullet>();
+    List<AutoBullet> autobullets = new ArrayList<AutoBullet>();
+
     private long timeSinceLastFire;
 
     private int HP;
@@ -59,6 +65,21 @@ public class SpaceShipPlayer extends Sprite {
         for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++) {
             bullets.add(new Bullet(gameEngine));
         }
+
+        for (int i=0; i<INITIAL_AUTOBULLET_POOL_AMOUNT; i++) {
+            autobullets.add(new AutoBullet(gameEngine));
+        }
+    }
+
+    private AutoBullet getAutoBullet() {
+        if (autobullets.isEmpty()) {
+            return null;
+        }
+        return autobullets.remove(0);
+    }
+
+    void releaseAutoBullet(AutoBullet bullet) {
+        autobullets.add(bullet);
     }
 
     private Bullet getBullet() {
@@ -71,8 +92,6 @@ public class SpaceShipPlayer extends Sprite {
     void releaseBullet(Bullet bullet) {
         bullets.add(bullet);
     }
-
-
     @Override
     public void startGame() {
         positionX = maxX / 2;
@@ -84,8 +103,7 @@ public class SpaceShipPlayer extends Sprite {
         // Get the info from the inputController
         updatePosition(elapsedMillis, gameEngine.theInputController);
         checkFiring(elapsedMillis, gameEngine);
-
-        //Log.d("Ship","Nave vuela por "+positionX+" , "+positionY);
+        checkAutoFiring(elapsedMillis,gameEngine);
     }
 
     //Si colisiona con algo pierde vida
@@ -114,6 +132,23 @@ public class SpaceShipPlayer extends Sprite {
         if (positionY > maxY) {
             positionY = maxY;
         }
+    }
+
+    private void checkAutoFiring(long elapsedMillis,GameEngine gameEngine) {
+        if (timeSinceLastFire > TIME_BETWEEN_AUTOBULLETS) {
+            AutoBullet bullet = getAutoBullet();
+            if (bullet == null) {
+                return;
+            }
+            bullet.init(this, positionX + imageWidth/2, positionY);
+            gameEngine.addGameObject(bullet);
+            timeSinceLastFire = 0;
+            gameEngine.onGameEvent(GameEvent.LaserFired);
+        }
+        else {
+            timeSinceLastFire += elapsedMillis;
+        }
+
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {

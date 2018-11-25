@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dadm.scaffold.EndGame;
+import dadm.scaffold.R;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
 
@@ -32,6 +34,7 @@ public class GameEngine {
 
     private Activity mainActivity;
 
+
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
 
@@ -45,6 +48,7 @@ public class GameEngine {
         this.pixelFactor = this.height / 400d;
 
         mSoundManager = new SoundManager(this.getContext());
+
     }
 
     public void setTheInputController(InputController inputController) {
@@ -209,7 +213,6 @@ public class GameEngine {
 
                     //Ejecutamos sus métodos de colision
                     a.onCollision(this,bb);
-                    b.onCollision(this,aa);
                     return true;
                 }
                 else {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.TextView;
 
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.EndGame;
@@ -21,6 +22,7 @@ import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
 import dadm.scaffold.engine.ParallaxBackground;
+import dadm.scaffold.engine.ScoreCounter;
 import dadm.scaffold.input.BasicInputController;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.Asteroid;
@@ -30,8 +32,8 @@ import dadm.scaffold.space.SpaceShipPlayer;
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
-    private GameEngine theGameEngine;
 
+    private GameEngine theGameEngine;
     public GameFragment() {
     }
 
@@ -39,6 +41,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_game, container, false);
+
         return rootView;
     }
 
@@ -47,6 +50,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
         final ViewTreeObserver observer = view.getViewTreeObserver();
+
+
+
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
             @Override
             public void onGlobalLayout(){
@@ -59,6 +65,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 50,    R.drawable.water));
                 theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 100,    R.drawable.leaves));
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
+                theGameEngine.addGameObject(new ScoreCounter(theGameEngine));
                 //theGameEngine.addGameObject(new Enemy(theGameEngine));
                 theGameEngine.addGameObject(new EnemySpawner(theGameEngine));
 
@@ -77,6 +84,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             theGameEngine.addGameObject(new Asteroid(theGameEngine));
         }
     }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_play_pause) {
