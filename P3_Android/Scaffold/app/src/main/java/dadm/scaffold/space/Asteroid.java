@@ -10,7 +10,7 @@ import dadm.scaffold.engine.Sprite;
 
 public class Asteroid extends Sprite {
 
-    private double speedFactor = 1;
+    private double speedFactor = 0.5;
 
 
     private int maxX;
@@ -77,27 +77,27 @@ public class Asteroid extends Sprite {
         positionX += speedX*elapsedMillis;
 
         if (positionY < -imageHeight) {
-            Ricochet();
-            //gameEngine.removeGameObject(this);
+            //Ricochet();
+            gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX < -imageWidth) {
-            Ricochet();
-            // gameEngine.removeGameObject(this);
+           // Ricochet();
+             gameEngine.removeGameObject(this);
             // And return it to the pool
             //
 
         }
         if (positionY > gameEngine.height) {
-            Ricochet();
-            //gameEngine.removeGameObject(this);
+            //Ricochet();
+            gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX > gameEngine.width) {
-            Ricochet();
-            // gameEngine.removeGameObject(this);
+          //  Ricochet();
+            gameEngine.removeGameObject(this);
             // And return it to the pool
             //
 

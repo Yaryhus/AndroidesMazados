@@ -22,7 +22,7 @@ public class AutoBullet extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        positionY += speedFactor * elapsedMillis;
+        positionX -= speedFactor * elapsedMillis;
 
         if (positionY < -gameEngine.height) {
             gameEngine.removeGameObject(this);
@@ -35,6 +35,21 @@ public class AutoBullet extends Sprite {
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
+        }
+
+
+        if (positionY < 0) {
+            //Ricochet();
+            gameEngine.removeGameObject(this);
+            // And return it to the pool
+            //parent.releaseBullet(this);
+        }
+        if (positionX < 0) {
+            // Ricochet();
+            gameEngine.removeGameObject(this);
+            // And return it to the pool
+            //
+
         }
 
     }

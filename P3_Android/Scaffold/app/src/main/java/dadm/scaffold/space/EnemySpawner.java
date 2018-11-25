@@ -41,11 +41,13 @@ public class EnemySpawner extends GameObject {
         mCurrentMillis += elapsedMillis;
 
         long waveTimestamp = TIME_BETWEEN_ENEMIES;
-        if (mCurrentMillis > waveTimestamp) {
-            gameEngine.addGameObject(new Asteroid(gameEngine));
-            gameEngine.addGameObject(new Enemy(gameEngine));
+        if(gameEngine.getNumGameObjects() < 15) {
+            if (mCurrentMillis > waveTimestamp) {
+                gameEngine.addGameObject(new Asteroid(gameEngine));
+                gameEngine.addGameObject(new Enemy(gameEngine));
 
-            mCurrentMillis = 0;
+                mCurrentMillis = 0;
+            }
         }
     }
 

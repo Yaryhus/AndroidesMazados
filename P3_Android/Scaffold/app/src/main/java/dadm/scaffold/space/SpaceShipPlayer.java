@@ -17,7 +17,7 @@ public class SpaceShipPlayer extends Sprite {
     private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 80;
 
     private static final long TIME_BETWEEN_BULLETS = 800;
-    private static final long TIME_BETWEEN_AUTOBULLETS = 550;
+    private static final long TIME_BETWEEN_AUTOBULLETS = 1250;
 
     List<Bullet> bullets = new ArrayList<Bullet>();
     List<AutoBullet> autobullets = new ArrayList<AutoBullet>();

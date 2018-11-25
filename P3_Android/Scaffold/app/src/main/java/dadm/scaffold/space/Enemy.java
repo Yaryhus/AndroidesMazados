@@ -36,16 +36,17 @@ public class Enemy extends Sprite {
 
 
             // They initialize in a [-30, 30] degrees angle
-            double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
-            mSpeedX = mSpeed * Math.sin(angle);
-            mSpeedY = mSpeed * Math.cos(angle);
+            double angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
+            mSpeedX = mSpeed * Math.cos(angle);
+            mSpeedY = mSpeed * Math.sin(angle);
 
+
+        // They initialize outside of the screen vertically
+        positionX = gameEngine.width;
 
         // Asteroids initialize in the central 50% of the screen
-        positionX = rnd.nextInt(gameEngine.width/2)+
-                gameEngine.width/4;
-        // They initialize outside of the screen vertically
-        positionY = -imageHeight;
+        positionY = rnd.nextInt(gameEngine.height/2)+
+                gameEngine.height/4;
 
 
         initBulletPool(gameEngine);

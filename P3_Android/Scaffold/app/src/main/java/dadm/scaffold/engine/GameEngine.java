@@ -251,4 +251,9 @@ public class GameEngine {
     public Context getContext() {
         return theGameView.getContext();
     }
+
+
+    public int getNumGameObjects(){
+        return gameObjects.size();
+    }
 }

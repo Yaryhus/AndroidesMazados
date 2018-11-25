@@ -23,7 +23,7 @@ public class ParallaxBackground extends GameObject {
 
     double screenWidth;
 
-    double targetWidth;
+    //double targetWidth;
 
     double positionY = 0;
 
@@ -36,12 +36,26 @@ public class ParallaxBackground extends GameObject {
         bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
         pixelFactor = gameEngine.pixelFactor;
         speedY = speed * pixelFactor / 1000d;
-        imageHeight = spriteDrawable.getIntrinsicHeight() * pixelFactor;
-        imageWidth = spriteDrawable.getIntrinsicWidth() * pixelFactor;
+
         screenHeight = gameEngine.height;
         screenWidth = gameEngine.width;
-        targetWidth = Math.min(imageWidth, screenWidth);
+        //targetWidth = Math.min(imageWidth, screenWidth);
 
+        int newHeight = (int) Math.floor((double) bitmap.getHeight() *( (double) gameEngine.width / (double) bitmap.getHeight()));
+
+        int newWidth = (int) Math.floor( ( (double) newHeight * (double) bitmap.getWidth()) / (double) bitmap.getHeight());
+
+        bitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
+
+        //imageHeight = spriteDrawable.getIntrinsicHeight() * pixelFactor;
+        //imageWidth = spriteDrawable.getIntrinsicWidth() * pixelFactor;
+
+
+        imageHeight = newHeight;
+        imageWidth = newWidth;
+
+        // x    -  y
+        // xn   - yn
          typeGO = "background";
          matrix = new Matrix();
     }
@@ -53,7 +67,7 @@ public class ParallaxBackground extends GameObject {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-         positionY += speedY*elapsedMillis;
+         positionY -= speedY*elapsedMillis;
     }
 
     @Override
@@ -63,15 +77,15 @@ public class ParallaxBackground extends GameObject {
 
             matrix.reset();
             matrix.postScale((float) (pixelFactor),        (float) (pixelFactor));
-            matrix.postTranslate(0, (float) (positionY - imageHeight));
+            matrix.postTranslate((float) (positionY - imageWidth), 0);
             canvas.drawBitmap(bitmap, matrix, null);
         }
         matrix.reset();
         matrix.postScale((float) (pixelFactor),      (float) (pixelFactor));
-        matrix.postTranslate(0, (float) positionY);
+        matrix.postTranslate((float) positionY , 0);
         canvas.drawBitmap(bitmap, matrix, null);
-        if (positionY > screenHeight) {
-            positionY -= imageHeight;
+        if (positionY > screenWidth) {
+            positionY -= screenWidth;
         }
 
     }

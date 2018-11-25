@@ -20,12 +20,18 @@ public class BulletEnemy extends Sprite {
         super(gameEngine, R.drawable.s_drop);
         typeS = "bulletenemy";
 
-        double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
-        speedX = speedFactor * Math.sin(angle);
-        speedY = speedFactor * Math.cos(angle);
 
 
-      //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
+        // They initialize in a [-30, 30] degrees angle
+        double angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
+        speedX = speedFactor * Math.cos(angle);
+        speedY = speedFactor * Math.sin(angle);
+
+
+
+
+
+        //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
     @Override
