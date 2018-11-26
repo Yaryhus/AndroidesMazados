@@ -1,7 +1,5 @@
 package dadm.scaffold.space;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,13 +7,12 @@ import java.util.Random;
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.Sprite;
-import dadm.scaffold.input.InputController;
 
-public class Enemy extends Sprite {
+public class SmartEnemy extends Sprite {
 
     private static final int INITIAL_BULLET_POOL_AMOUNT = 6;
     private static final long TIME_BETWEEN_BULLETS = 500;
-    List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
+    List<SmartBullet> bullets = new ArrayList<SmartBullet>();
     private long timeSinceLastFire;
 
     private int maxX;
@@ -31,8 +28,8 @@ public class Enemy extends Sprite {
 
     EnemySpawner parent;
 
-    public Enemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_fish);
+    public SmartEnemy(GameEngine gameEngine){
+        super(gameEngine, R.drawable.s_fish_b);
 
         typeS = "enemy";
 
@@ -41,18 +38,18 @@ public class Enemy extends Sprite {
 
     private void initBulletPool(GameEngine gameEngine) {
         for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++) {
-            bullets.add(new BulletEnemy(gameEngine));
+            bullets.add(new SmartBullet(gameEngine));
         }
     }
 
-    private BulletEnemy getBullet() {
+    private SmartBullet getBullet() {
         if (bullets.isEmpty()) {
             return null;
         }
         return bullets.remove(0);
     }
 
-    void releaseBullet(BulletEnemy bullet) {
+    void releaseBullet(SmartBullet bullet) {
         bullets.add(bullet);
     }
 
@@ -69,13 +66,13 @@ public class Enemy extends Sprite {
         positionX += mSpeedX * elapsedMillis;
 
         if (positionY < -imageHeight) {
-            parent.releaseEnemy(this);
+            parent.releaseSmartEnemy(this);
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX < -imageWidth) {
-            parent.releaseEnemy(this);
+            parent.releaseSmartEnemy(this);
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
@@ -91,7 +88,7 @@ public class Enemy extends Sprite {
 
         //Si colisiona con una bala
         if(collider.typeS.equals("bullet")) {
-            parent.releaseEnemy(this);
+            parent.releaseSmartEnemy(this);
             gameEngine.removeGameObject(this);
         }
     }
@@ -99,7 +96,7 @@ public class Enemy extends Sprite {
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
         if (timeSinceLastFire > TIME_BETWEEN_BULLETS) {
-            BulletEnemy bullet = getBullet();
+            SmartBullet bullet = getBullet();
             if (bullet == null) {
                 return;
             }
@@ -115,6 +112,7 @@ public class Enemy extends Sprite {
 
     public void init(EnemySpawner parent, GameEngine gameEngine) {
         this.parent = parent;
+
 
         // They initialize in a [-30, 30] degrees angle
         double angle = rnd.nextDouble() * 3d * Math.PI / 4d - 5d * Math.PI / 4d;

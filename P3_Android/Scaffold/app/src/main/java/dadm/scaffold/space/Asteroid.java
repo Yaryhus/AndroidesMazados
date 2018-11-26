@@ -20,6 +20,8 @@ public class Asteroid extends Sprite {
     double speedX;
     double speedY;
 
+    EnemySpawner parent;
+
     public Asteroid(GameEngine gameEngine){
         super(gameEngine, R.drawable.s_bread);
 
@@ -29,27 +31,6 @@ public class Asteroid extends Sprite {
         typeS = "asteroid";
 
 
-        //speedFactor = gameEngine.pixelFactor * -3d / 100d;
-        // They initialize in a [-30, 30] degrees angle
-        double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
-        speedX = speedFactor * Math.sin(angle);
-        speedY = speedFactor * Math.cos(angle);
-
-
-        // Asteroids initialize in the central 50% of the screen
-        positionX = rnd.nextInt(gameEngine.width/2)+
-                gameEngine.width/4;
-        // They initialize outside of the screen vertically
-        positionY = -imageHeight;
-/*
-        //randoms para posiciones y velocidades
-        rnd1 = rnd.nextInt(10+1+10)-10;
-        rnd2 = rnd.nextInt(10+1+10)-10;
-
-        //Velocidad
-        speedFactor = gameEngine.pixelFactor * -3d / 100d;
-
-        */
     }
 
     @Override
@@ -78,12 +59,14 @@ public class Asteroid extends Sprite {
 
         if (positionY < -imageHeight) {
             //Ricochet();
+            parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX < -imageWidth) {
            // Ricochet();
+            parent.releaseAsteroid(this);
              gameEngine.removeGameObject(this);
             // And return it to the pool
             //
@@ -91,12 +74,14 @@ public class Asteroid extends Sprite {
         }
         if (positionY > gameEngine.height) {
             //Ricochet();
+            parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //parent.releaseBullet(this);
         }
         if (positionX > gameEngine.width) {
           //  Ricochet();
+            parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);
             // And return it to the pool
             //
@@ -115,6 +100,7 @@ public class Asteroid extends Sprite {
             Ricochet();
         }
         else {
+            parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);
         }
     }
@@ -126,8 +112,21 @@ public class Asteroid extends Sprite {
         speedY = -speedY;
     }
 
-    public void init(double initPositionX, double initPositionY) {
-        positionX = initPositionX - imageWidth/2;
-        positionY = initPositionY - imageHeight/2;
+    public void init(EnemySpawner parent, GameEngine gameEngine) {
+        this.parent = parent;
+
+
+        //speedFactor = gameEngine.pixelFactor * -3d / 100d;
+        // They initialize in a [-30, 30] degrees angle
+        double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
+        speedX = speedFactor * Math.sin(angle);
+        speedY = speedFactor * Math.cos(angle);
+
+
+        // Asteroids initialize in the central 50% of the screen
+        positionX = rnd.nextInt(gameEngine.width/2)+
+                gameEngine.width/4;
+        // They initialize outside of the screen vertically
+        positionY = -imageHeight;
     }
 }

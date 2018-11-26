@@ -45,7 +45,7 @@ public class GameEngine {
         this.height = theGameView.getHeight()
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
-        this.pixelFactor = this.height / 400d;
+        this.pixelFactor = this.height / 350d;
 
         mSoundManager = new SoundManager(this.getContext());
 
@@ -146,7 +146,7 @@ public class GameEngine {
 
     public void hasGameFinished()
     {
-        if(getPlayer().getScore() == 10)
+        if(getPlayer().getScore() == 100)
             EndState(true);
 
         else if(getPlayer().getHP() <=0)

@@ -13,8 +13,8 @@ import dadm.scaffold.input.InputController;
 
 public class SpaceShipPlayer extends Sprite {
 
-    private static final int INITIAL_BULLET_POOL_AMOUNT = 50;
-    private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 80;
+    private static final int INITIAL_BULLET_POOL_AMOUNT = 5;
+    private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 5;
 
     private static final long TIME_BETWEEN_BULLETS = 800;
     private static final long TIME_BETWEEN_AUTOBULLETS = 1250;
@@ -79,7 +79,12 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     void releaseAutoBullet(AutoBullet bullet) {
+
         autobullets.add(bullet);
+
+
+
+
     }
 
     private Bullet getBullet() {
@@ -137,9 +142,14 @@ public class SpaceShipPlayer extends Sprite {
     private void checkAutoFiring(long elapsedMillis,GameEngine gameEngine) {
         if (timeSinceLastFire > TIME_BETWEEN_AUTOBULLETS) {
             AutoBullet bullet = getAutoBullet();
+
             if (bullet == null) {
+
                 return;
+
             }
+
+
             bullet.init(this, positionX + imageWidth/2, positionY);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
@@ -152,7 +162,7 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
-        if (gameEngine.theInputController.isFiring && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
+        if (gameEngine.theInputController.isFiring){// && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
             Bullet bullet = getBullet();
             if (bullet == null) {
                 return;
@@ -165,6 +175,15 @@ public class SpaceShipPlayer extends Sprite {
         else {
             timeSinceLastFire += elapsedMillis;
         }
+    }
+
+
+    public double getPositionX(){
+        return positionX;
+    }
+
+    public double getPositionY(){
+        return positionY;
     }
 
 }

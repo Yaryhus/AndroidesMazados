@@ -6,29 +6,24 @@ import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.Sprite;
 
-public class BulletEnemy extends Sprite {
+public class SmartBullet extends Sprite {
 
     private double speedFactor = 1;
 
-    private Enemy parent;
+    private SmartEnemy parent;
 
     Random rnd = new Random();
 
     double speedX, speedY;
 
-    public BulletEnemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_drop);
+    GameEngine gameEngine;
+
+    public SmartBullet(GameEngine gameEngine){
+        super(gameEngine, R.drawable.s_smart_bullet);
         typeS = "bulletenemy";
 
 
-
-        // They initialize in a [-30, 30] degrees angle
-        double angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
-        speedX = speedFactor * Math.cos(angle);
-        speedY = speedFactor * Math.sin(angle);
-
-
-
+this.gameEngine = gameEngine;
 
 
         //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
@@ -68,9 +63,31 @@ public class BulletEnemy extends Sprite {
     }
 
 
-    public void init(Enemy parentPlayer, double initPositionX, double initPositionY) {
+    public void init(SmartEnemy parentPlayer, double initPositionX, double initPositionY) {
         positionX = initPositionX - imageWidth/2;
         positionY = initPositionY - imageHeight/2;
+
+
         parent = parentPlayer;
+
+
+
+
+
+
+        double angle = (double) Math.toDegrees(Math.atan2(gameEngine.getPlayer().getPositionY() - initPositionY, gameEngine.getPlayer().getPositionX() - initPositionX));
+
+        if(angle < 0){
+            angle += 360;
+        }
+
+
+
+        // They initialize in a [-30, 30] degrees angle
+        angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
+
+        speedX = speedFactor * Math.cos(angle);
+        speedY = speedFactor * Math.sin(angle);
+
     }
 }
