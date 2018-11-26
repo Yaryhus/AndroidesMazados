@@ -54,12 +54,14 @@ public abstract class Sprite extends GameObject {
 
         this.col=new Rect((int)positionX,(int)positionY,(int)positionX+imageWidth,(int)positionY+imageHeight);
 
+        /*
         //Pintamos
         if(col != null) {
             Paint p = new Paint();
             p.setColor(Color.GREEN);
             canvas.drawRect(col, p);
         }
+        */
 
         matrix.reset();
         matrix.postScale((float) pixelFactor, (float) pixelFactor);
