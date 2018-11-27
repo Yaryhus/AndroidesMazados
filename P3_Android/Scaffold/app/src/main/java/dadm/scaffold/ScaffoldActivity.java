@@ -8,6 +8,7 @@ import android.view.View;
 
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.counter.MainMenuFragment;
+import dadm.scaffold.counter.SelectCharacterFragment;
 import dadm.scaffold.engine.SoundManager;
 
 public class ScaffoldActivity extends AppCompatActivity {
@@ -34,6 +35,10 @@ public class ScaffoldActivity extends AppCompatActivity {
         return mSoundManager;
     }
 
+
+    public void selectCharacter() {
+        navigateToFragment( new SelectCharacterFragment());
+    }
     public void startGame() {
         // Navigate the the game fragment, which makes the start automatically
         navigateToFragment( new GameFragment());
@@ -93,4 +98,6 @@ public class ScaffoldActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

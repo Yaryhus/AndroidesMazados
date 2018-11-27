@@ -21,7 +21,7 @@ public abstract class Sprite extends GameObject {
 
     public String typeS;
 
-    private final Bitmap bitmap;
+    private Bitmap bitmap;
     protected final int imageHeight;
     protected final int imageWidth;
 
@@ -69,5 +69,12 @@ public abstract class Sprite extends GameObject {
         matrix.postRotate((float) rotation, (float) (positionX + imageWidth/2), (float) (positionY + imageHeight/2));
         canvas.drawBitmap(bitmap,matrix,null);
 
+    }
+
+    public void setImage( GameEngine gameEngine, int drawableRes){
+
+        Resources r = gameEngine.getContext().getResources();
+        Drawable spriteDrawable = r.getDrawable(drawableRes);
+        this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
     }
 }

@@ -100,6 +100,8 @@ public class Asteroid extends Sprite {
             Ricochet();
         }
         else {
+
+            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
             parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);
         }

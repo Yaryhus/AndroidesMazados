@@ -60,6 +60,8 @@ this.gameEngine = gameEngine;
         parent.releaseBullet(this);
         gameEngine.removeGameObject(this);
 
+
+
     }
 
 

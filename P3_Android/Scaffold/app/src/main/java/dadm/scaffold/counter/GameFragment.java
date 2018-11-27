@@ -25,16 +25,22 @@ import dadm.scaffold.engine.ParallaxBackground;
 import dadm.scaffold.engine.ScoreCounter;
 import dadm.scaffold.input.BasicInputController;
 import dadm.scaffold.input.JoystickInputController;
+import dadm.scaffold.model.SettingsInfo;
 import dadm.scaffold.space.Asteroid;
 import dadm.scaffold.space.Enemy;
 import dadm.scaffold.space.EnemySpawner;
+import dadm.scaffold.space.LifeItem;
 import dadm.scaffold.space.SpaceShipPlayer;
+import dadm.scaffold.space.TimeItem;
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private GameEngine theGameEngine;
+
+
     public GameFragment() {
+
     }
 
     @Override
@@ -64,11 +70,16 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 50,    R.drawable.water));
                 theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 100,    R.drawable.leaves));
-                theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
+
+
+                theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, SettingsInfo.getInstance().getDrawableRes()));
+
+
                 theGameEngine.addGameObject(new ScoreCounter(theGameEngine));
                 //theGameEngine.addGameObject(new Enemy(theGameEngine));
                 theGameEngine.addGameObject(new EnemySpawner(theGameEngine));
-
+                theGameEngine.addGameObject(new LifeItem(theGameEngine));
+                theGameEngine.addGameObject(new TimeItem(theGameEngine));
                 //asteroides();
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.startGame();
@@ -113,6 +124,10 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             return true;
         }
         return false;
+    }
+
+    public void setPlayerImage( int drawableRes){
+        theGameEngine.getPlayer().setImage(theGameEngine, drawableRes);
     }
 
     //Vamos a la pantalla de final.

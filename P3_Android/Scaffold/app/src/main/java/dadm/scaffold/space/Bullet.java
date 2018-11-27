@@ -11,11 +11,15 @@ public class Bullet extends Sprite {
     private double speedFactor;
 
     private SpaceShipPlayer parent;
+    double maxX, maxY;
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.s_coffee);
         typeS = "bullet";
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
+
+        maxX = gameEngine.width - imageWidth;
+        maxY = gameEngine.height - imageHeight;
     }
 
     @Override
@@ -25,30 +29,24 @@ public class Bullet extends Sprite {
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         positionX -= speedFactor * elapsedMillis;
 
-        if (positionY < -gameEngine.height) {
-            gameEngine.removeGameObject(this);
-            // And return it to the pool
+        if (positionY > maxY)  {
             parent.releaseBullet(this);
+            gameEngine.removeGameObject(this);
         }
 
 
-        if (positionX < -gameEngine.width) {
-            gameEngine.removeGameObject(this);
-            // And return it to the pool
+        if (positionY > maxX)  {
             parent.releaseBullet(this);
+            gameEngine.removeGameObject(this);
         }
 
         if (positionY < 0) {
-            //Ricochet();
+            parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
-            // And return it to the pool
-            //parent.releaseBullet(this);
         }
         if (positionX < 0) {
-            // Ricochet();
+            parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
-            // And return it to the pool
-            //
 
         }
 
@@ -67,9 +65,11 @@ public class Bullet extends Sprite {
         //Si no es otra bala, se destruye.
         if(!collider.typeS.equals("bullet")) {
 
-           gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
+           //gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
 
+            parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
+
             gameEngine.onGameEvent(GameEvent.AsteroidHit);
         }
     }

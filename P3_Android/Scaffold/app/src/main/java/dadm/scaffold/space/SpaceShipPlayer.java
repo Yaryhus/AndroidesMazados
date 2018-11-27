@@ -16,23 +16,31 @@ public class SpaceShipPlayer extends Sprite {
     private static final int INITIAL_BULLET_POOL_AMOUNT = 5;
     private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 5;
 
-    private static final long TIME_BETWEEN_BULLETS = 800;
-    private static final long TIME_BETWEEN_AUTOBULLETS = 1250;
+    private static long TIME_BETWEEN_BULLETS = 1500;
+    private static long TIME_BETWEEN_AUTOBULLETS = 750;
+
+
+    private static long TIME_REDUCED = 10000;
 
     List<Bullet> bullets = new ArrayList<Bullet>();
     List<AutoBullet> autobullets = new ArrayList<AutoBullet>();
 
     private long timeSinceLastFire;
+    private long timeSinceLastAutoFire;
+    private long timeSinceReduced;
 
-    private int HP;
+
+    public int HP;
     private int score;
     private int maxX;
     private int maxY;
     private double speedFactor;
 
+    boolean timeReduced = false;
 
-    public SpaceShipPlayer(GameEngine gameEngine) {
-        super(gameEngine, R.drawable.s_duck_a);
+
+    public SpaceShipPlayer(GameEngine gameEngine, int drawableRes) {
+        super(gameEngine,drawableRes);
         speedFactor = pixelFactor * 100d / 500d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;
@@ -109,6 +117,23 @@ public class SpaceShipPlayer extends Sprite {
         updatePosition(elapsedMillis, gameEngine.theInputController);
         checkFiring(elapsedMillis, gameEngine);
         checkAutoFiring(elapsedMillis,gameEngine);
+
+
+        Log.e("HOLA", " hey: "+ timeSinceReduced);
+        Log.e("HOLA", " hey: "+ TIME_BETWEEN_BULLETS);
+        if(timeReduced){
+            if(timeSinceReduced > TIME_REDUCED) {
+
+                TIME_BETWEEN_BULLETS = 1500;
+                TIME_BETWEEN_AUTOBULLETS = 750;
+
+                timeSinceReduced = 0;
+
+                timeReduced = false;
+            } else{
+                timeSinceReduced += elapsedMillis;
+            }
+        }
     }
 
     //Si colisiona con algo pierde vida
@@ -140,7 +165,7 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     private void checkAutoFiring(long elapsedMillis,GameEngine gameEngine) {
-        if (timeSinceLastFire > TIME_BETWEEN_AUTOBULLETS) {
+        if (timeSinceLastAutoFire > TIME_BETWEEN_AUTOBULLETS) {
             AutoBullet bullet = getAutoBullet();
 
             if (bullet == null) {
@@ -152,17 +177,17 @@ public class SpaceShipPlayer extends Sprite {
 
             bullet.init(this, positionX + imageWidth/2, positionY);
             gameEngine.addGameObject(bullet);
-            timeSinceLastFire = 0;
+            timeSinceLastAutoFire = 0;
             gameEngine.onGameEvent(GameEvent.LaserFired);
         }
         else {
-            timeSinceLastFire += elapsedMillis;
+            timeSinceLastAutoFire += elapsedMillis;
         }
 
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
-        if (gameEngine.theInputController.isFiring){// && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
+        if (gameEngine.theInputController.isFiring && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
             Bullet bullet = getBullet();
             if (bullet == null) {
                 return;
@@ -184,6 +209,14 @@ public class SpaceShipPlayer extends Sprite {
 
     public double getPositionY(){
         return positionY;
+    }
+
+    public void reduceTime(){
+       TIME_BETWEEN_BULLETS = 750;
+       TIME_BETWEEN_AUTOBULLETS = 325;
+
+       timeReduced = true;
+
     }
 
 }

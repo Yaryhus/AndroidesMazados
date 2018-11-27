@@ -88,6 +88,7 @@ public class SmartEnemy extends Sprite {
 
         //Si colisiona con una bala
         if(collider.typeS.equals("bullet")) {
+            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+10);
             parent.releaseSmartEnemy(this);
             gameEngine.removeGameObject(this);
         }

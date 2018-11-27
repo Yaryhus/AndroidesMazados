@@ -36,7 +36,8 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
             if (v.getId() == R.id.btn_start) {
-                ((ScaffoldActivity) getActivity()).startGame();
+               ((ScaffoldActivity) getActivity()).selectCharacter();
+
             }
             else if (v.getId() == R.id.btn_music) {
                 SoundManager soundManager =
@@ -71,4 +72,7 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
                 btnSounds.setText(R.string.sound_off);
             }
         }
+
+
+
 }
