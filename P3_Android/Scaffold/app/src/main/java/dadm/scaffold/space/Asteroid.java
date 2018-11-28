@@ -23,7 +23,7 @@ public class Asteroid extends Sprite {
     EnemySpawner parent;
 
     public Asteroid(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_bread);
+        super(gameEngine, R.drawable.aestroid_dark);
 
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;

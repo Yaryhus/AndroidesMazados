@@ -19,7 +19,7 @@ public class SmartBullet extends Sprite {
     GameEngine gameEngine;
 
     public SmartBullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_smart_bullet);
+        super(gameEngine, R.drawable.space_mine);
         typeS = "bulletenemy";
 
 

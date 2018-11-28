@@ -29,9 +29,16 @@ public class SelectCharacterFragment extends BaseFragment implements View.OnClic
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.select_A).setOnClickListener(this);
+        view.findViewById(R.id.select_A).setBackgroundResource( R.drawable.ship_a);
+
         view.findViewById(R.id.select_B).setOnClickListener(this);
+        view.findViewById(R.id.select_B).setBackgroundResource( R.drawable.ship_b);
+
         view.findViewById(R.id.select_C).setOnClickListener(this);
+        view.findViewById(R.id.select_C).setBackgroundResource( R.drawable.ship_c);
+
         view.findViewById(R.id.select_D).setOnClickListener(this);
+        view.findViewById(R.id.select_D).setBackgroundResource( R.drawable.ship_d);
 
     }
 
@@ -39,22 +46,22 @@ public class SelectCharacterFragment extends BaseFragment implements View.OnClic
     public void onClick(View v) {
 
         if (v.getId() == R.id.select_A) {
-            SettingsInfo.getInstance().setDrawableRes( R.drawable.s_duck_a);
+            SettingsInfo.getInstance().setDrawableRes( R.drawable.ship_a);
             ((ScaffoldActivity) getActivity()).startGame();
         }
 
         if (v.getId() == R.id.select_B) {
-            SettingsInfo.getInstance().setDrawableRes( R.drawable.ship);
+            SettingsInfo.getInstance().setDrawableRes( R.drawable.ship_b);
             ((ScaffoldActivity) getActivity()).startGame();
         }
 
         if (v.getId() == R.id.select_C) {
-            SettingsInfo.getInstance().setDrawableRes( R.drawable.robot);
+            SettingsInfo.getInstance().setDrawableRes( R.drawable.ship_c);
             ((ScaffoldActivity) getActivity()).startGame();
         }
 
         if (v.getId() == R.id.select_D) {
-            SettingsInfo.getInstance().setDrawableRes( R.drawable.s_coffee);
+            SettingsInfo.getInstance().setDrawableRes( R.drawable.ship_d);
             ((ScaffoldActivity) getActivity()).startGame();
         }
         }

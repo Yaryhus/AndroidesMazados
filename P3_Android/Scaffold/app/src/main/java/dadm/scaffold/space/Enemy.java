@@ -32,7 +32,7 @@ public class Enemy extends Sprite {
     EnemySpawner parent;
 
     public Enemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_fish);
+        super(gameEngine, R.drawable.small_ships);
 
         typeS = "enemy";
 

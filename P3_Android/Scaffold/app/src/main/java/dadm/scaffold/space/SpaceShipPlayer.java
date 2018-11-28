@@ -175,7 +175,7 @@ public class SpaceShipPlayer extends Sprite {
             }
 
 
-            bullet.init(this, positionX + imageWidth/2, positionY);
+            bullet.init(this, positionX + imageWidth, positionY + imageHeight/2);
             gameEngine.addGameObject(bullet);
             timeSinceLastAutoFire = 0;
             gameEngine.onGameEvent(GameEvent.LaserFired);
@@ -192,7 +192,7 @@ public class SpaceShipPlayer extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + imageWidth/2, positionY);
+            bullet.init(this, positionX + imageWidth, positionY + imageHeight/2);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
             gameEngine.onGameEvent(GameEvent.LaserFired);

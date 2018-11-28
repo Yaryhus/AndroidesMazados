@@ -17,7 +17,7 @@ public class BulletEnemy extends Sprite {
     double speedX, speedY;
 
     public BulletEnemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_drop);
+        super(gameEngine, R.drawable.bullet_red);
         typeS = "bulletenemy";
 
 

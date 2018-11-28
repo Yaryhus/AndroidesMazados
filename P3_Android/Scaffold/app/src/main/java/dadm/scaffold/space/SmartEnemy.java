@@ -29,7 +29,7 @@ public class SmartEnemy extends Sprite {
     EnemySpawner parent;
 
     public SmartEnemy(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_fish_b);
+        super(gameEngine, R.drawable.spaceship_enemy_red);
 
         typeS = "enemy";
 
@@ -62,7 +62,7 @@ public class SmartEnemy extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-        positionY += mSpeedY * elapsedMillis;
+      //  positionY += mSpeedY * elapsedMillis;
         positionX += mSpeedX * elapsedMillis;
 
         if (positionY < -imageHeight) {

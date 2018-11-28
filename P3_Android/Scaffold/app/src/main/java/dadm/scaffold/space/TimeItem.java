@@ -29,7 +29,7 @@ public class TimeItem extends Sprite {
     EnemySpawner parent;
 
     public TimeItem(GameEngine gameEngine){
-        super(gameEngine, R.drawable.robot);
+        super(gameEngine, R.drawable.time);
 
         typeS = "time";
 

@@ -29,7 +29,7 @@ public class LifeItem extends Sprite {
     EnemySpawner parent;
 
     public LifeItem(GameEngine gameEngine){
-        super(gameEngine, R.drawable.ship);
+        super(gameEngine, R.drawable.life);
 
         typeS = "life";
 

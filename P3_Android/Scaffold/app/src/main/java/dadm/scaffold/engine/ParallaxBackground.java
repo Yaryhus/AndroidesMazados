@@ -45,10 +45,13 @@ public class ParallaxBackground extends GameObject {
         screenHeight = gameEngine.height;
         screenWidth = gameEngine.width;
 
+        int newWidth = gameEngine.width; //(int) Math.floor( ( (double) newHeight * (double) bitmap.getWidth()) / (double) bitmap.getHeight());
+        int newHeight =  (bitmap.getHeight()* newWidth) / bitmap.getWidth();
 
-        int newHeight = (int) Math.floor((double) bitmap.getHeight() *( (double) gameEngine.width / (double) bitmap.getHeight()));
+        //   h    -   w
+        //   x   -   w'
 
-        int newWidth = (int) Math.floor( ( (double) newHeight * (double) bitmap.getWidth()) / (double) bitmap.getHeight());
+
 
         bitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
 
@@ -60,7 +63,9 @@ public class ParallaxBackground extends GameObject {
        imageHeight = newHeight;
         imageWidth = newWidth;
 
-        targetHeight = Math.min(imageHeight, screenHeight);
+        positionY = imageWidth;
+
+       // targetHeight = Math.min(imageHeight, screenHeight);
 
         // x    -  y
         // xn   - yn
@@ -84,21 +89,21 @@ public class ParallaxBackground extends GameObject {
     public void onDraw(Canvas canvas) {
 
 
-        Log.i("Hola", "Hey  " + positionY);
+       // Log.i("Hola", "Hey  " + positionY);
 
        // if (positionY > imageWidth) {
 
             matrix.reset();
-            matrix.postScale((float) (pixelFactor),        (float) (pixelFactor));
+       //     matrix.postScale((float) (pixelFactor),        (float) (pixelFactor));
             matrix.postTranslate((float) (positionY - imageWidth), 0);
             canvas.drawBitmap(bitmap, matrix, null);
     //    }
         matrix.reset();
-        matrix.postScale((float) (pixelFactor),      (float) (pixelFactor));
+     //   matrix.postScale((float) (pixelFactor),      (float) (pixelFactor));
         matrix.postTranslate((float) positionY , 0);
         canvas.drawBitmap(bitmap, matrix, null);
         if (positionY < 0) {
-            positionY += screenWidth;
+            positionY = imageWidth;
         }
 
 

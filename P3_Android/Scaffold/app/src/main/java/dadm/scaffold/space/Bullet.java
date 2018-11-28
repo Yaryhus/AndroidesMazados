@@ -14,7 +14,7 @@ public class Bullet extends Sprite {
     double maxX, maxY;
 
     public Bullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.s_coffee);
+        super(gameEngine, R.drawable.mothership_blue);
         typeS = "bullet";
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
 
