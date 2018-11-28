@@ -1,5 +1,6 @@
 package dadm.scaffold.counter;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,9 @@ public class SelectCharacterFragment extends BaseFragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_select_character, container, false);
+
+        Resources r = getResources();
+        rootView.setBackground(r.getDrawable(R.drawable.backmenu));
         return rootView;
     }
 
@@ -29,16 +33,16 @@ public class SelectCharacterFragment extends BaseFragment implements View.OnClic
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.select_A).setOnClickListener(this);
-        view.findViewById(R.id.select_A).setBackgroundResource( R.drawable.ship_a);
+        view.findViewById(R.id.select_A).setBackgroundResource( R.drawable.select1);
 
         view.findViewById(R.id.select_B).setOnClickListener(this);
-        view.findViewById(R.id.select_B).setBackgroundResource( R.drawable.ship_b);
+        view.findViewById(R.id.select_B).setBackgroundResource( R.drawable.select2);
 
         view.findViewById(R.id.select_C).setOnClickListener(this);
-        view.findViewById(R.id.select_C).setBackgroundResource( R.drawable.ship_c);
+        view.findViewById(R.id.select_C).setBackgroundResource( R.drawable.select3);
 
         view.findViewById(R.id.select_D).setOnClickListener(this);
-        view.findViewById(R.id.select_D).setBackgroundResource( R.drawable.ship_d);
+        view.findViewById(R.id.select_D).setBackgroundResource( R.drawable.select4);
 
     }
 

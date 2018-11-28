@@ -45,7 +45,7 @@ public class GameEngine {
         this.height = theGameView.getHeight()
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
-        this.pixelFactor = this.height / 700d;
+        this.pixelFactor = this.height / 800d;
 
         mSoundManager = new SoundManager(this.getContext());
 

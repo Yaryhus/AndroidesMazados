@@ -1,5 +1,6 @@
 package dadm.scaffold.counter;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,10 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        Resources r = getResources();
+        rootView.setBackground(r.getDrawable(R.drawable.backmenu));
         return rootView;
+
     }
 
     @Override

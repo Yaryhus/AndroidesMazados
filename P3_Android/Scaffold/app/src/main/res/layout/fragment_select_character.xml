@@ -1,58 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        style="@android:style/TextAppearance.DeviceDefault.Large"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/game_title"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"
-        android:text="@string/start" />
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout2">
 
     <Button
         android:id="@+id/select_A"
-        android:layout_width="132dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="56dp"
-        android:text="Button" />
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/select_B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/select_B"
-        android:layout_width="132dp"
-        android:layout_height="100dp"
-        android:layout_above="@+id/select_C"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="153dp"
-        android:text="Button" />
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/select_C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/select_A"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/select_C"
-        android:layout_width="132dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/select_A"
-        android:layout_below="@+id/select_A"
-        android:text="Button" />
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/select_D"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_A" />
 
     <Button
         android:id="@+id/select_D"
-        android:layout_width="132dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/select_B"
-        android:layout_alignTop="@+id/select_C"
-        android:text="Button" />
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/select_C"
+        app:layout_constraintTop_toBottomOf="@+id/select_B" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="442dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/select" />
+
+</android.support.constraint.ConstraintLayout>
