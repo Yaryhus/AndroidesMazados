@@ -140,7 +140,8 @@ public class SpaceShipPlayer extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
-        if(!collider.typeS.equals("bullet")){
+        //Si no es un item ni una bala propia, pierde vida
+        if(!collider.typeS.equals("bullet") && !collider.typeS.equals("time")&& !collider.typeS.equals("life")){
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
             HP-=1;
         }
