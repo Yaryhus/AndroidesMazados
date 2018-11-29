@@ -119,8 +119,8 @@ public class SpaceShipPlayer extends Sprite {
         checkAutoFiring(elapsedMillis,gameEngine);
 
 
-        Log.e("HOLA", " hey: "+ timeSinceReduced);
-        Log.e("HOLA", " hey: "+ TIME_BETWEEN_BULLETS);
+        //Log.e("HOLA", " hey: "+ timeSinceReduced);
+        //Log.e("HOLA", " hey: "+ TIME_BETWEEN_BULLETS);
         if(timeReduced){
             if(timeSinceReduced > TIME_REDUCED) {
 
