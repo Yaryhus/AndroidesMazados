@@ -117,13 +117,13 @@ public class SoundManager {
         createSoundPool();
         mSoundsMap = new HashMap<GameEvent, Integer>();
         loadEventSound(mContext, GameEvent.AsteroidHit,
-                "Asteroid_destroy.wav");
+                "Asteroid_destroy.ogg");
         loadEventSound(mContext, GameEvent.SpaceshipHit,
-                "Player_destroy.wav");
+                "Player_destroy.ogg");
         loadEventSound(mContext, GameEvent.LaserFired,
-                "Laser_shoot.wav");
+                "Laser_shoot.ogg");
         loadEventSound(mContext, GameEvent.LaserEnemy,
-                "Laser_enemy.wav");
+                "Laser_enemy.ogg");
     }
 
     private void unloadSounds() {
