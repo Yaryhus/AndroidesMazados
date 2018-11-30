@@ -99,8 +99,8 @@ public class Asteroid extends Sprite {
         if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy") ) {
             Ricochet();
         }
-        else {
-
+        else if (collider.typeS.equals("player")){
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.explosion2));
             gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
             parent.releaseAsteroid(this);
             gameEngine.removeGameObject(this);

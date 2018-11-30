@@ -13,6 +13,9 @@ import java.util.List;
 import dadm.scaffold.EndGame;
 import dadm.scaffold.R;
 import dadm.scaffold.input.InputController;
+import dadm.scaffold.space.Asteroid;
+import dadm.scaffold.space.Enemy;
+import dadm.scaffold.space.SmartEnemy;
 import dadm.scaffold.space.SpaceShipPlayer;
 
 public class GameEngine {
@@ -45,7 +48,7 @@ public class GameEngine {
         this.height = theGameView.getHeight()
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
-        this.pixelFactor = this.height / 800d;
+        this.pixelFactor = this.height / 1000d;
 
         mSoundManager = new SoundManager(this.getContext());
 
@@ -144,9 +147,11 @@ public class GameEngine {
         hasGameFinished();
     }
 
+
     public void hasGameFinished()
     {
-        if(getPlayer().getScore() > 100)
+
+        if(getPlayer().getScore() > 150)
             EndState(true);
 
         else if(getPlayer().getHP() <=0)
@@ -191,6 +196,20 @@ public class GameEngine {
                 Sprite p = (Sprite) gameObjects.get(i);
                 if(p.typeS.equals("player"))
                     return (SpaceShipPlayer) p;
+            }
+        }
+        //no se deberia llamar nunca
+        return null;
+    }
+
+
+    public Enemy getEnemy()
+    {
+        for(int i=0;i<gameObjects.size();i++){
+            if(gameObjects.get(i).typeGO.equals("sprite")) {
+                Sprite p = (Sprite) gameObjects.get(i);
+                if(p.typeS.equals("enemy"))
+                    return (Enemy) p;
             }
         }
         //no se deberia llamar nunca

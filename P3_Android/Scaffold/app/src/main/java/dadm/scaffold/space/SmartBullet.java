@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import dadm.scaffold.R;
@@ -56,10 +58,11 @@ this.gameEngine = gameEngine;
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
-
-        parent.releaseBullet(this);
-        gameEngine.removeGameObject(this);
-
+        if(collider.typeS.equals("player")||collider.typeS.equals("bullet")) {
+            parent.releaseBullet(this);
+            gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.explosion2));
+            gameEngine.removeGameObject(this);
+        }
 
 
     }
@@ -72,11 +75,6 @@ this.gameEngine = gameEngine;
 
         parent = parentPlayer;
 
-
-
-
-
-
         double angle = (double) Math.toDegrees(Math.atan2(gameEngine.getPlayer().getPositionY() - initPositionY, gameEngine.getPlayer().getPositionX() - initPositionX));
 
         if(angle < 0){
@@ -85,11 +83,8 @@ this.gameEngine = gameEngine;
 
 
 
-        // They initialize in a [-30, 30] degrees angle
-        angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
-
-        speedX = speedFactor * Math.cos(angle);
-        speedY = speedFactor * Math.sin(angle);
+        speedX = speedFactor * Math.cos(Math.toRadians(angle));
+        speedY = speedFactor * Math.sin(Math.toRadians(angle));
 
     }
 }

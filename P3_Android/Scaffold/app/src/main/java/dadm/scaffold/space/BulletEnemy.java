@@ -61,9 +61,11 @@ public class BulletEnemy extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
-
-        parent.releaseBullet(this);
-        gameEngine.removeGameObject(this);
+        if(collider.typeS.equals("player")||collider.typeS.equals("bullet")) {
+            parent.releaseBullet(this);
+            gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.explosion2));
+            gameEngine.removeGameObject(this);
+        }
 
     }
 

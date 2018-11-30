@@ -16,7 +16,7 @@ public class Bullet extends Sprite {
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.mothership_blue);
         typeS = "bullet";
-        speedFactor = gameEngine.pixelFactor * -300d / 1000d;
+        speedFactor = gameEngine.pixelFactor * -300d / 500d;
 
         maxX = gameEngine.width - imageWidth;
         maxY = gameEngine.height - imageHeight;
@@ -63,12 +63,14 @@ public class Bullet extends Sprite {
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
         //Si no es otra bala, se destruye.
-        if(!collider.typeS.equals("bullet")) {
+        if(collider.typeS.equals("enemy") || collider.typeS.equals("enemybullet")|| collider.typeS.equals("asteroid")) {
 
            //gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
 
             parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
+
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.explosion));
 
             gameEngine.onGameEvent(GameEvent.AsteroidHit);
         }

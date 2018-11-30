@@ -26,6 +26,8 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/btton"
         android:text="@string/sound_on"
+        android:textAllCaps="true"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_music"
@@ -40,6 +42,9 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/btton"
         android:text="@string/music_on"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 

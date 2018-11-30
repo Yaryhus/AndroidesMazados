@@ -14,7 +14,7 @@ import dadm.scaffold.input.InputController;
 public class Enemy extends Sprite {
 
     private static final int INITIAL_BULLET_POOL_AMOUNT = 6;
-    private static final long TIME_BETWEEN_BULLETS = 500;
+    private static final long TIME_BETWEEN_BULLETS = 2000;
     List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
     private long timeSinceLastFire;
 
@@ -25,7 +25,7 @@ public class Enemy extends Sprite {
     Random rnd = new Random();
 
 
-    private final double mSpeed = 0.1;
+    private final double mSpeed = 0.4;
     private double mSpeedX;
     private double mSpeedY;
 
@@ -90,7 +90,8 @@ public class Enemy extends Sprite {
 
 
         //Si colisiona con una bala
-        if(collider.typeS.equals("bullet")) {
+        if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.galaxy_3));
             gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+5);
             parent.releaseEnemy(this);
             gameEngine.removeGameObject(this);
@@ -104,7 +105,7 @@ public class Enemy extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + imageWidth/2, positionY);
+            bullet.init(this, positionX - imageWidth/2, positionY + imageWidth/2);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
         }

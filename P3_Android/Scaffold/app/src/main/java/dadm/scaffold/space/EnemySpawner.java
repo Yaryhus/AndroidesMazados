@@ -11,14 +11,17 @@ import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameEvent;
 import dadm.scaffold.engine.GameObject;
+import dadm.scaffold.engine.ParallaxBackground;
 import dadm.scaffold.engine.Sprite;
 
 public class EnemySpawner extends GameObject {
 
 
 
-    private static final int INITIAL_ENEMY_POOL_AMOUNT = 1;
-    private static final long TIME_BETWEEN_ENEMIES = 2000;
+    private static final int INITIAL_ENEMY_POOL_AMOUNT = 2;
+
+    private static final int INITIAL_SMARTENEMY_POOL_AMOUNT = 1;
+    private static long TIME_BETWEEN_ENEMIES = 2000;
  //  List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
     private long timeSinceLastFire;
     int mEnemiesSpawned;
@@ -35,6 +38,11 @@ public class EnemySpawner extends GameObject {
 
         for (int i=0; i<INITIAL_ENEMY_POOL_AMOUNT; i++) {
             enemies.add(new Enemy(gameEngine));
+
+        }
+
+        for (int i=0; i<INITIAL_SMARTENEMY_POOL_AMOUNT; i++) {
+
             asteroids.add(new Asteroid(gameEngine));
             smartEnemies.add(new SmartEnemy(gameEngine));
         }
@@ -68,9 +76,27 @@ public class EnemySpawner extends GameObject {
 
     }
 
+    boolean createEnemies = false;
+
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         mCurrentMillis += elapsedMillis;
+
+
+
+
+            if(gameEngine.getPlayer().getScore() > 50 && createEnemies == false) {
+                for (int i = 0; i < 2; i++) {
+                    enemies.add(new Enemy(gameEngine));
+                    asteroids.add(new Asteroid(gameEngine));
+                    smartEnemies.add(new SmartEnemy(gameEngine));
+         //           gameEngine.addGameObject(  new ParallaxBackground(gameEngine, 300,    R.drawable.rampage));
+                }
+
+                gameEngine.addGameObject(  new ParallaxBackground(gameEngine, 300,    R.drawable.rampage));
+                createEnemies = true;
+                TIME_BETWEEN_ENEMIES = 100;
+            }
 
         if(mCurrentMillis>TIME_BETWEEN_ENEMIES) {
 

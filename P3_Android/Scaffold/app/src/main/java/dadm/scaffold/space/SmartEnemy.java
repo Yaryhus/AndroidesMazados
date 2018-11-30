@@ -11,7 +11,7 @@ import dadm.scaffold.engine.Sprite;
 public class SmartEnemy extends Sprite {
 
     private static final int INITIAL_BULLET_POOL_AMOUNT = 6;
-    private static final long TIME_BETWEEN_BULLETS = 500;
+    private static final long TIME_BETWEEN_BULLETS = 2000;
     List<SmartBullet> bullets = new ArrayList<SmartBullet>();
     private long timeSinceLastFire;
 
@@ -22,7 +22,7 @@ public class SmartEnemy extends Sprite {
     Random rnd = new Random();
 
 
-    private final double mSpeed = 0.1;
+    private final double mSpeed = 0.2;
     private double mSpeedX;
     private double mSpeedY;
 
@@ -87,8 +87,11 @@ public class SmartEnemy extends Sprite {
 
 
         //Si colisiona con una bala
-        if(collider.typeS.equals("bullet")) {
+        if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
+
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.galaxy_3));
             gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+10);
+
             parent.releaseSmartEnemy(this);
             gameEngine.removeGameObject(this);
         }
@@ -101,7 +104,7 @@ public class SmartEnemy extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + imageWidth/2, positionY);
+            bullet.init(this, positionX - imageWidth/2, positionY + imageWidth/2);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
         }

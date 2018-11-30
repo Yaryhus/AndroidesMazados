@@ -75,7 +75,7 @@ public class AutoBullet extends Sprite {
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
         //Si no es otra bala, se destruye.
-        if(!collider.typeS.equals("bullet")) {
+        if(collider.typeS.equals("enemy") || collider.typeS.equals("enemybullet")|| collider.typeS.equals("asteroid")) {
 
            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
 
