@@ -13,13 +13,13 @@ import dadm.scaffold.input.InputController;
 
 public class SpaceShipPlayer extends Sprite {
 
-    private static final int INITIAL_BULLET_POOL_AMOUNT = 5;
-    private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 5;
+    private static final int INITIAL_BULLET_POOL_AMOUNT = 12;
+    private static final int INITIAL_AUTOBULLET_POOL_AMOUNT = 10;
 
     private static long TIME_BETWEEN_BULLETS = 1500;
     private static long TIME_BETWEEN_AUTOBULLETS = 1500;
 
-
+    public int numberOfBombs = 4;
     private static long TIME_REDUCED = 10000;
 
     List<Bullet> bullets = new ArrayList<Bullet>();
@@ -188,19 +188,40 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
+        if (numberOfBombs > 0){
         if (gameEngine.theInputController.isFiring && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
-            Bullet bullet = getBullet();
+
+
+                Bullet bullet = getBullet();
+                numberOfBombs --;
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + imageWidth, positionY + imageHeight/2);
+            bullet.init(this, positionX + imageWidth, positionY + imageHeight / 2, 30);
             gameEngine.addGameObject(bullet);
+
+
+            bullet = getBullet();
+            if (bullet == null) {
+                return;
+            }
+            bullet.init(this, positionX + imageWidth, positionY + imageHeight / 2, 0);
+            gameEngine.addGameObject(bullet);
+
+            bullet = getBullet();
+            if (bullet == null) {
+                return;
+            }
+            bullet.init(this, positionX + imageWidth, positionY + imageHeight / 2, -30);
+            gameEngine.addGameObject(bullet);
+
+
             timeSinceLastFire = 0;
             gameEngine.onGameEvent(GameEvent.LaserFired);
-        }
-        else {
+        } else {
             timeSinceLastFire += elapsedMillis;
         }
+    }
     }
 
 
@@ -213,8 +234,8 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     public void reduceTime(){
-       TIME_BETWEEN_BULLETS = 1000;
-       TIME_BETWEEN_AUTOBULLETS = 1000;
+       TIME_BETWEEN_BULLETS = 500;
+       TIME_BETWEEN_AUTOBULLETS = 500;
 
        timeReduced = true;
 

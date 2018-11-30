@@ -247,11 +247,11 @@ public class GameEngine {
 
 
     public void onGameEvent (GameEvent gameEvent) {
-        for(int i=0; i<gameObjects.size(); i++)
-        {
+       // for(int i=0; i<gameObjects.size(); i++)
+       // {
             mSoundManager.playSoundForGameEvent(gameEvent);
 
-        }
+      //  }
     }
 
 

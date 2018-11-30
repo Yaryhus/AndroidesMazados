@@ -26,6 +26,7 @@ import dadm.scaffold.engine.ScoreCounter;
 import dadm.scaffold.input.BasicInputController;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.model.SettingsInfo;
+import dadm.scaffold.space.AmmoItem;
 import dadm.scaffold.space.Asteroid;
 import dadm.scaffold.space.Enemy;
 import dadm.scaffold.space.EnemySpawner;
@@ -54,6 +55,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btn_play_pause).setBackgroundResource(R.drawable.pause);
+
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
         final ViewTreeObserver observer = view.getViewTreeObserver();
 
@@ -68,9 +71,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
-                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 20,    R.drawable.back));
-                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 50,    R.drawable.back3));
-               theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 100,    R.drawable.back2));
+                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 50,    R.drawable.back));
+                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 100,    R.drawable.back3));
+               theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 200,    R.drawable.back2));
 
 
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, SettingsInfo.getInstance().getDrawableRes()));
@@ -81,6 +84,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.addGameObject(new EnemySpawner(theGameEngine));
                 theGameEngine.addGameObject(new LifeItem(theGameEngine));
                 theGameEngine.addGameObject(new TimeItem(theGameEngine));
+                theGameEngine.addGameObject(new AmmoItem(theGameEngine));
                 //asteroides();
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.startGame();

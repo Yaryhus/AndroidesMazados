@@ -11,7 +11,9 @@ public class Bullet extends Sprite {
     private double speedFactor;
 
     private SpaceShipPlayer parent;
-    double maxX, maxY;
+    double maxX, maxY, speedX, speedY;
+
+
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.mothership_blue);
@@ -27,7 +29,9 @@ public class Bullet extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        positionX -= speedFactor * elapsedMillis;
+        positionX -= speedX * elapsedMillis;
+
+        positionY -= speedY * elapsedMillis;
 
         if (positionY > maxY)  {
             parent.releaseBullet(this);
@@ -53,9 +57,21 @@ public class Bullet extends Sprite {
     }
 
 
-    public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY) {
+    public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY, int angle) {
         positionX = initPositionX - imageWidth/2;
         positionY = initPositionY - imageHeight/2;
+
+
+        if(angle < 0){
+            angle += 360;
+        }
+
+
+
+        speedX = speedFactor * Math.cos(Math.toRadians(angle));
+        speedY = speedFactor * Math.sin(Math.toRadians(angle));
+
+
         parent = parentPlayer;
     }
 

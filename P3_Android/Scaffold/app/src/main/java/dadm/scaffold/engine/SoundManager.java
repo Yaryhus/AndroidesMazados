@@ -18,7 +18,7 @@ public class SoundManager {
 
     private Context mContext;
     private SoundPool mSoundPool;
-    private final int MAX_STREAMS = 8;
+    private final int MAX_STREAMS = 50;
     private final int DEFAULT_MUSIC_VOLUME = 5;
     private final String MUSIC_PREF_KEY="A";
     private final String SOUNDS_PREF_KEY="B";
