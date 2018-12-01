@@ -13,6 +13,7 @@ import java.util.List;
 import dadm.scaffold.EndGame;
 import dadm.scaffold.R;
 import dadm.scaffold.input.InputController;
+import dadm.scaffold.model.SettingsInfo;
 import dadm.scaffold.space.Asteroid;
 import dadm.scaffold.space.Enemy;
 import dadm.scaffold.space.SmartEnemy;
@@ -37,6 +38,8 @@ public class GameEngine {
 
     private Activity mainActivity;
 
+    private int enemiesKilled = 0;
+
 
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
@@ -51,6 +54,7 @@ public class GameEngine {
         this.pixelFactor = this.height / 1000d;
 
         mSoundManager = new SoundManager(this.getContext());
+
 
     }
 
@@ -151,8 +155,12 @@ public class GameEngine {
     public void hasGameFinished()
     {
 
-        if(getPlayer().getScore() > 150)
+        if(getPlayer().getScore() > 1000) {
+            SettingsInfo.getInstance().setEnemiesKilled(enemiesKilled);
             EndState(true);
+
+
+        }
 
         else if(getPlayer().getHP() <=0)
             EndState(false);
@@ -274,5 +282,13 @@ public class GameEngine {
 
     public int getNumGameObjects(){
         return gameObjects.size();
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public void setEnemiesKilled(int enemiesKilled) {
+        this.enemiesKilled = enemiesKilled;
     }
 }

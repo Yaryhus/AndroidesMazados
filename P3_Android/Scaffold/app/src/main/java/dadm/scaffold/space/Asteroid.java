@@ -95,14 +95,13 @@ public class Asteroid extends Sprite {
 
         //Log.d("OnColission_Asteroide","He colisionado");
 
-        //Si colisiona con un asteroide o enemigo, rebota
-        if(collider.typeS.equals("asteroid") || collider.typeS.equals("enemy") ) {
-            Ricochet();
-        }
-        else if (collider.typeS.equals("player")){
+        if (collider.typeS.equals("player") || collider.typeS.equals("bullet") ){
             gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.explosion2));
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.uno));
             gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
             parent.releaseAsteroid(this);
+
+            gameEngine.setEnemiesKilled( gameEngine.getEnemiesKilled()+1);
             gameEngine.removeGameObject(this);
         }
     }
@@ -123,6 +122,7 @@ public class Asteroid extends Sprite {
         double angle = rnd.nextDouble()*Math.PI/3d-Math.PI/6d;
         speedX = speedFactor * Math.sin(angle);
         speedY = speedFactor * Math.cos(angle);
+
 
 
         // Asteroids initialize in the central 50% of the screen

@@ -92,8 +92,10 @@ public class Enemy extends Sprite {
         //Si colisiona con una bala
         if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
             gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.galaxy_3));
+            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.cinco));
             gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+5);
             parent.releaseEnemy(this);
+            gameEngine.setEnemiesKilled( gameEngine.getEnemiesKilled()+1);
             gameEngine.removeGameObject(this);
         }
     }

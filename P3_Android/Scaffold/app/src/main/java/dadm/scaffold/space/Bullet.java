@@ -16,7 +16,7 @@ public class Bullet extends Sprite {
 
 
     public Bullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.mothership_blue);
+        super(gameEngine, R.drawable.bomb);
         typeS = "bullet";
         speedFactor = gameEngine.pixelFactor * -300d / 500d;
 

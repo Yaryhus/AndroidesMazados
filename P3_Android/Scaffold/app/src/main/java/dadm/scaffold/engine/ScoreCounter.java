@@ -16,11 +16,13 @@ public class ScoreCounter extends GameObject {
     private Paint paint;
     private int HP;
     private float score;
+    private int enemiesKilled;
 
     private String ScoreText = "";
     private String HPText = "";
     private SpaceShipPlayer player;
     private String BombsText;
+    private String EnemiesText;
 
     //Inicializamos valores
     public ScoreCounter(GameEngine gameEngine) {
@@ -31,6 +33,7 @@ public class ScoreCounter extends GameObject {
         paint.setTextSize(textHeight);
         player = gameEngine.getPlayer();
         width = gameEngine.width;
+
     }
 
     @Override
@@ -43,9 +46,11 @@ public class ScoreCounter extends GameObject {
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         HP=player.getHP();
         score=player.getScore();
-        ScoreText="Score: "+score;
-        HPText = "Lives: "+ HP;
-        BombsText = "Bombs: "+ player.numberOfBombs;
+        enemiesKilled = gameEngine.getEnemiesKilled();
+        ScoreText="Score: "+ (int)score;
+        HPText = "Lives: "+ (int)HP;
+        EnemiesText = "Kills: "+ (int)enemiesKilled;
+        BombsText = "Bombs: "+ (int)player.numberOfBombs;
     }
 
     @Override
@@ -55,6 +60,7 @@ public class ScoreCounter extends GameObject {
         paint.setColor(Color.WHITE);
         canvas.drawText(HPText, textWidth/2, textHeight*1f, paint);
         canvas.drawText(BombsText , textWidth/2, textHeight*2f, paint);
+        canvas.drawText(EnemiesText , textWidth/2, textHeight*3f, paint);
         canvas.drawText(ScoreText, (float)width/2 - textWidth/2 , textHeight*1f, paint);
     }
 

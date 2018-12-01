@@ -6,6 +6,8 @@ public class SettingsInfo {
 
     private int drawableRes;
 
+    private int enemiesKilled;
+
     private static SettingsInfo instance;
 
 
@@ -28,6 +30,14 @@ public class SettingsInfo {
 
     public void setDrawableRes(int drawableRes) {
         this.drawableRes = drawableRes;
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public void setEnemiesKilled(int enemiesKilled) {
+        this.enemiesKilled = enemiesKilled;
     }
 }
 

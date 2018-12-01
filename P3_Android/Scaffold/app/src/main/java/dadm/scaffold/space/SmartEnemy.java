@@ -22,6 +22,8 @@ public class SmartEnemy extends Sprite {
     Random rnd = new Random();
 
 
+    int HP;
+
     private final double mSpeed = 0.2;
     private double mSpeedX;
     private double mSpeedY;
@@ -88,12 +90,22 @@ public class SmartEnemy extends Sprite {
 
         //Si colisiona con una bala
         if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
+            if (HP == 2){
+                HP = 1;
+            } else if (HP == 1) {
 
-            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.galaxy_3));
-            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+10);
+                HP = 0;
+                gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.galaxy_3));
 
-            parent.releaseSmartEnemy(this);
-            gameEngine.removeGameObject(this);
+                gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.diez));
+
+
+                gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore() + 10);
+                gameEngine.setEnemiesKilled( gameEngine.getEnemiesKilled()+1);
+                parent.releaseSmartEnemy(this);
+                gameEngine.removeGameObject(this);
+
+            }
         }
     }
 
@@ -131,7 +143,7 @@ public class SmartEnemy extends Sprite {
         positionY = rnd.nextInt(gameEngine.height / 2) +
                 gameEngine.height / 4;
 
-
+        HP = 2;
         initBulletPool(gameEngine);
     }
 

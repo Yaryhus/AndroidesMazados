@@ -85,7 +85,7 @@ public class EnemySpawner extends GameObject {
 
 
 
-            if(gameEngine.getPlayer().getScore() > 50 && createEnemies == false) {
+            if(gameEngine.getPlayer().getScore() > 200 && createEnemies == false) {
                 for (int i = 0; i < 2; i++) {
                     enemies.add(new Enemy(gameEngine));
                     asteroids.add(new Asteroid(gameEngine));

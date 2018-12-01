@@ -8,17 +8,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.counter.MainMenuFragment;
+import dadm.scaffold.model.SettingsInfo;
 
 public class EndGame extends AppCompatActivity {
 
 
     public int globalScore =0;
     Button TryAgain,Exit;
-    TextView Score, Titulo, Best1,Best2,Best3,Best4,Best5;
+    TextView Score,EnemiesKilled,Best1,Best2,Best3,Best4,Best5;
+    ImageView Titulo;
 
 
 
@@ -34,7 +37,8 @@ public class EndGame extends AppCompatActivity {
         //Accedemos a los objetos y los metemos en variables
         Exit = (Button) findViewById(R.id.ExitMenu);
         Score = (TextView) findViewById(R.id.FinalScore);
-        Titulo = (TextView) findViewById(R.id.Titulo);
+        EnemiesKilled = (TextView) findViewById(R.id.EnemiesKilled);
+        Titulo = (ImageView) findViewById(R.id.Titulo);
 
         //Recojemos el paquete con información de la partida.
         Intent intent = getIntent();
@@ -42,13 +46,15 @@ public class EndGame extends AppCompatActivity {
 
         //Ganado o perdido
         if(finJuego[0].equals("true"))
-            Titulo.setText("¡Has ganado!");
+            Titulo.setImageResource( R.drawable.won);
         else
-            Titulo.setText("¡Has perdido!");
+            Titulo.setImageResource( R.drawable.lose);
 
         //Score
         globalScore= Integer.parseInt(finJuego[1]);
         Score.setText("Your Score: "+finJuego[1]);
+
+        EnemiesKilled.setText("Enemies Killed: "+ SettingsInfo.getInstance().getEnemiesKilled());
 
 
 
