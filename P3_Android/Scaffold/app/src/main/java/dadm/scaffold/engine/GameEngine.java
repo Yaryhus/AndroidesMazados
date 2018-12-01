@@ -156,7 +156,7 @@ public class GameEngine {
     {
 
         if(getPlayer().getScore() > 1000) {
-            SettingsInfo.getInstance().setEnemiesKilled(enemiesKilled);
+           // SettingsInfo.getInstance().setEnemiesKilled(enemiesKilled);
             EndState(true);
 
 
@@ -174,7 +174,7 @@ public class GameEngine {
             Intent intent = new Intent(getContext(), EndGame.class);
 
             //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
-            String[] finJuego = {"true",Integer.toString(getPlayer().getScore())};
+            String[] finJuego = {"true",Integer.toString(getPlayer().getScore()), Integer.toString((enemiesKilled))};
 
             //Mandamos el paquete
             intent.putExtra("finJuego",finJuego);
@@ -185,7 +185,7 @@ public class GameEngine {
             Intent intent = new Intent(getContext(), EndGame.class);
 
             //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
-            String[] finJuego = {"false",Integer.toString(getPlayer().getScore())};
+            String[] finJuego = {"false",Integer.toString(getPlayer().getScore()),  Integer.toString((enemiesKilled))};
 
             //Mandamos el paquete
             intent.putExtra("finJuego",finJuego);

@@ -54,7 +54,7 @@ public class EndGame extends AppCompatActivity {
         globalScore= Integer.parseInt(finJuego[1]);
         Score.setText("Your Score: "+finJuego[1]);
 
-        EnemiesKilled.setText("Enemies Killed: "+ SettingsInfo.getInstance().getEnemiesKilled());
+        EnemiesKilled.setText("Enemies Killed: "+ finJuego[2]);
 
 
 
