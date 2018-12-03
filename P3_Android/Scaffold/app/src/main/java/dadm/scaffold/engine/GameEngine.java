@@ -100,7 +100,6 @@ public class GameEngine {
     }
 
 
-
     public void resumeGame() {
         if (theUpdateThread != null) {
             theUpdateThread.resumeGame();
@@ -138,11 +137,11 @@ public class GameEngine {
                 gameObjects.add(objectsToAdd.remove(0));
             }
 
-            if(!gameObjects.isEmpty()) {
+            if (!gameObjects.isEmpty()) {
                 for (int i = 0; i < gameObjects.size() - 1; i++) {
                     for (int j = 0; j < gameObjects.size() - 1; j++) {
-                        if(gameObjects.get(i) != gameObjects.get(j))
-                        colisionDetection(gameObjects.get(i), gameObjects.get(j));
+                        if (gameObjects.get(i) != gameObjects.get(j))
+                            colisionDetection(gameObjects.get(i), gameObjects.get(j));
                     }
                 }
             }
@@ -152,43 +151,39 @@ public class GameEngine {
     }
 
 
-    public void hasGameFinished()
-    {
+    public void hasGameFinished() {
 
-        if(getPlayer().getScore() > 1000) {
-           // SettingsInfo.getInstance().setEnemiesKilled(enemiesKilled);
+        if (getPlayer().getScore() > 1000) {
+            // SettingsInfo.getInstance().setEnemiesKilled(enemiesKilled);
             EndState(true);
 
 
-        }
-
-        else if(getPlayer().getHP() <=0)
+        } else if (getPlayer().getHP() <= 0)
             EndState(false);
     }
 
 
-    public void EndState(boolean win){
+    public void EndState(boolean win) {
 
         stopGame();
-        if(win){
+        if (win) {
             Intent intent = new Intent(getContext(), EndGame.class);
 
             //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
-            String[] finJuego = {"true",Integer.toString(getPlayer().getScore()), Integer.toString((enemiesKilled))};
+            String[] finJuego = {"true", Integer.toString(getPlayer().getScore()), Integer.toString((enemiesKilled))};
 
             //Mandamos el paquete
-            intent.putExtra("finJuego",finJuego);
+            intent.putExtra("finJuego", finJuego);
 
             mainActivity.startActivity(intent);
-        }
-        else{
+        } else {
             Intent intent = new Intent(getContext(), EndGame.class);
 
             //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
-            String[] finJuego = {"false",Integer.toString(getPlayer().getScore()),  Integer.toString((enemiesKilled))};
+            String[] finJuego = {"false", Integer.toString(getPlayer().getScore()), Integer.toString((enemiesKilled))};
 
             //Mandamos el paquete
-            intent.putExtra("finJuego",finJuego);
+            intent.putExtra("finJuego", finJuego);
 
             mainActivity.startActivity(intent);
 
@@ -197,12 +192,11 @@ public class GameEngine {
     }
 
 
-    public SpaceShipPlayer getPlayer()
-    {
-        for(int i=0;i<gameObjects.size();i++){
-            if(gameObjects.get(i).typeGO.equals("sprite")) {
+    public SpaceShipPlayer getPlayer() {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if (gameObjects.get(i).typeGO.equals("sprite")) {
                 Sprite p = (Sprite) gameObjects.get(i);
-                if(p.typeS.equals("player"))
+                if (p.typeS.equals("player"))
                     return (SpaceShipPlayer) p;
             }
         }
@@ -211,12 +205,11 @@ public class GameEngine {
     }
 
 
-    public Enemy getEnemy()
-    {
-        for(int i=0;i<gameObjects.size();i++){
-            if(gameObjects.get(i).typeGO.equals("sprite")) {
+    public Enemy getEnemy() {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if (gameObjects.get(i).typeGO.equals("sprite")) {
                 Sprite p = (Sprite) gameObjects.get(i);
-                if(p.typeS.equals("enemy"))
+                if (p.typeS.equals("enemy"))
                     return (Enemy) p;
             }
         }
@@ -225,28 +218,25 @@ public class GameEngine {
     }
 
     //Detectamos colisiones entre dos objetos, a y b. Gracias a sus Sprites, que tienen las dimensiones.
-    public boolean colisionDetection(GameObject a, GameObject b)
-    {
+    public boolean colisionDetection(GameObject a, GameObject b) {
         //casteamos a Sprite si podemos.
         Sprite aa, bb;
 
         //Si el GameObject es de tipo sprite
-            if(b.typeGO != null && a.typeGO != null && a.typeGO.equals("sprite") && b.typeGO.equals("sprite")){
+        if (b.typeGO != null && a.typeGO != null && a.typeGO.equals("sprite") && b.typeGO.equals("sprite")) {
             aa = (Sprite) a;
             bb = (Sprite) b;
 
-                if(aa.col!=null && bb.col!=null && Rect.intersects(aa.col,bb.col))
-                {
+            if (aa.col != null && bb.col != null && Rect.intersects(aa.col, bb.col)) {
 
-                    //Ejecutamos sus métodos de colision
-                    a.onCollision(this,bb);
-                    return true;
-                }
-                else {
-                    //Log.d("Colision", "No detectada colision entre" + a + " y " + b);
-                    return false;
-                }
-            }//Si el Gameobject NO es de tipo Sprite
+                //Ejecutamos sus métodos de colision
+                a.onCollision(this, bb);
+                return true;
+            } else {
+                //Log.d("Colision", "No detectada colision entre" + a + " y " + b);
+                return false;
+            }
+        }//Si el Gameobject NO es de tipo Sprite
         else
             return false;
 
@@ -254,12 +244,12 @@ public class GameEngine {
     }
 
 
-    public void onGameEvent (GameEvent gameEvent) {
-       // for(int i=0; i<gameObjects.size(); i++)
-       // {
-            mSoundManager.playSoundForGameEvent(gameEvent);
+    public void onGameEvent(GameEvent gameEvent) {
+        // for(int i=0; i<gameObjects.size(); i++)
+        // {
+        mSoundManager.playSoundForGameEvent(gameEvent);
 
-      //  }
+        //  }
     }
 
 
@@ -280,7 +270,7 @@ public class GameEngine {
     }
 
 
-    public int getNumGameObjects(){
+    public int getNumGameObjects() {
         return gameObjects.size();
     }
 

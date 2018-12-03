@@ -39,44 +39,39 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-            if (v.getId() == R.id.btn_start) {
-               ((ScaffoldActivity) getActivity()).selectCharacter();
+        if (v.getId() == R.id.btn_start) {
+            ((ScaffoldActivity) getActivity()).selectCharacter();
 
-            }
-            else if (v.getId() == R.id.btn_music) {
-                SoundManager soundManager =
-                        ((ScaffoldActivity) getActivity()).getSoundManager();
-                soundManager.toggleMusicStatus();
-                updateSoundAndMusicButtons();
-            }
-            else if (v.getId() == R.id.TryAgain) {
-                SoundManager soundManager =
-                        ((ScaffoldActivity) getActivity()).getSoundManager();
-                soundManager.toggleSoundStatus();
-                updateSoundAndMusicButtons();
-            }
+        } else if (v.getId() == R.id.btn_music) {
+            SoundManager soundManager =
+                    ((ScaffoldActivity) getActivity()).getSoundManager();
+            soundManager.toggleMusicStatus();
+            updateSoundAndMusicButtons();
+        } else if (v.getId() == R.id.TryAgain) {
+            SoundManager soundManager =
+                    ((ScaffoldActivity) getActivity()).getSoundManager();
+            soundManager.toggleSoundStatus();
+            updateSoundAndMusicButtons();
         }
+    }
 
     private void updateSoundAndMusicButtons() {
-        SoundManager soundManager =  ((ScaffoldActivity) getActivity()).getSoundManager();
+        SoundManager soundManager = ((ScaffoldActivity) getActivity()).getSoundManager();
         TextView btnMusic = (TextView)
                 getView().findViewById(R.id.btn_music);
         if (soundManager.getMusicStatus()) {
             btnMusic.setText(R.string.music_on);
+        } else {
+            btnMusic.setText(R.string.music_off);
         }
-        else {
-        btnMusic.setText(R.string.music_off);
-        }
-            TextView btnSounds= (TextView)
-                    getView().findViewById(R.id.TryAgain);
+        TextView btnSounds = (TextView)
+                getView().findViewById(R.id.TryAgain);
         if (soundManager.getSoundStatus()) {
-                btnSounds.setText(R.string.sound_on);
-            }
-        else {
-                btnSounds.setText(R.string.sound_off);
-            }
+            btnSounds.setText(R.string.sound_on);
+        } else {
+            btnSounds.setText(R.string.sound_off);
         }
-
+    }
 
 
 }

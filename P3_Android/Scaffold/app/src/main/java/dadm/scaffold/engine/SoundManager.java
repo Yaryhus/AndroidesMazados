@@ -20,8 +20,8 @@ public class SoundManager {
     private SoundPool mSoundPool;
     private final int MAX_STREAMS = 50;
     private final int DEFAULT_MUSIC_VOLUME = 5;
-    private final String MUSIC_PREF_KEY="A";
-    private final String SOUNDS_PREF_KEY="B";
+    private final String MUSIC_PREF_KEY = "A";
+    private final String SOUNDS_PREF_KEY = "B";
 
     private HashMap<GameEvent, Integer> mSoundsMap;
     private MediaPlayer mBgPlayer;
@@ -37,7 +37,8 @@ public class SoundManager {
         mContext = context;
         loadIfNeeded();
     }
-    private void loadIfNeeded () {
+
+    private void loadIfNeeded() {
         if (mSoundEnabled) {
             loadSounds();
         }
@@ -45,9 +46,11 @@ public class SoundManager {
             loadMusic();
         }
     }
+
     public boolean getSoundStatus() {
         return mSoundEnabled;
     }
+
     public boolean getMusicStatus() {
         return mMusicEnabled;
     }
@@ -56,15 +59,14 @@ public class SoundManager {
         mSoundEnabled = !mSoundEnabled;
         if (mSoundEnabled) {
             loadSounds();
-        }
-        else {
+        } else {
             unloadSounds();
         }
 // Save it to preferences
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .putBoolean(SOUNDS_PREF_KEY, mSoundEnabled)
                 .apply();
-                 //.commit();
+        //.commit();
     }
 
     public void toggleMusicStatus() {
@@ -72,15 +74,14 @@ public class SoundManager {
         if (mMusicEnabled) {
             loadMusic();
             resumeBgMusic();
-        }
-        else {
+        } else {
             unloadMusic();
         }
 // Save it to preferences
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .putBoolean(MUSIC_PREF_KEY, mMusicEnabled)
                 .apply();
-                //.commit();
+        //.commit();
 
     }
 
@@ -142,16 +143,19 @@ public class SoundManager {
             mSoundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
         }
     }
+
     public void pauseBgMusic() {
         if (mMusicEnabled) {
             mBgPlayer.pause();
         }
     }
+
     public void resumeBgMusic() {
         if (mMusicEnabled) {
             mBgPlayer.start();
         }
     }
+
     private void loadMusic() {
         try {
             mBgPlayer = new MediaPlayer();
@@ -165,7 +169,7 @@ public class SoundManager {
             mBgPlayer.setVolume(DEFAULT_MUSIC_VOLUME,
                     DEFAULT_MUSIC_VOLUME);
             mBgPlayer.prepare();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -174,7 +178,6 @@ public class SoundManager {
         mBgPlayer.stop();
         mBgPlayer.release();
     }
-
 
 
 }

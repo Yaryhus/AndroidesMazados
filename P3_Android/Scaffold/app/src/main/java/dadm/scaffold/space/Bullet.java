@@ -14,8 +14,7 @@ public class Bullet extends Sprite {
     double maxX, maxY, speedX, speedY;
 
 
-
-    public Bullet(GameEngine gameEngine){
+    public Bullet(GameEngine gameEngine) {
         super(gameEngine, R.drawable.bomb);
         typeS = "bullet";
         speedFactor = gameEngine.pixelFactor * -300d / 500d;
@@ -25,7 +24,8 @@ public class Bullet extends Sprite {
     }
 
     @Override
-    public void startGame() {}
+    public void startGame() {
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
@@ -33,13 +33,13 @@ public class Bullet extends Sprite {
 
         positionY -= speedY * elapsedMillis;
 
-        if (positionY > maxY)  {
+        if (positionY > maxY) {
             parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
         }
 
 
-        if (positionY > maxX)  {
+        if (positionY > maxX) {
             parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
         }
@@ -58,14 +58,13 @@ public class Bullet extends Sprite {
 
 
     public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY, int angle) {
-        positionX = initPositionX - imageWidth/2;
-        positionY = initPositionY - imageHeight/2;
+        positionX = initPositionX - imageWidth / 2;
+        positionY = initPositionY - imageHeight / 2;
 
 
-        if(angle < 0){
+        if (angle < 0) {
             angle += 360;
         }
-
 
 
         speedX = speedFactor * Math.cos(Math.toRadians(angle));
@@ -79,14 +78,14 @@ public class Bullet extends Sprite {
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
         //Si no es otra bala, se destruye.
-        if(collider.typeS.equals("enemy") || collider.typeS.equals("enemybullet")|| collider.typeS.equals("asteroid")) {
+        if (collider.typeS.equals("enemy") || collider.typeS.equals("enemybullet") || collider.typeS.equals("asteroid")) {
 
-           //gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
+            //gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+1);
 
             parent.releaseBullet(this);
             gameEngine.removeGameObject(this);
 
-            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.explosion));
+            gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.explosion));
 
             gameEngine.onGameEvent(GameEvent.AsteroidHit);
         }

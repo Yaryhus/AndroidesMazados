@@ -13,8 +13,7 @@ public abstract class Item extends Sprite {
     Random rnd = new Random();
 
 
-
-    public Item(GameEngine gameEngine, int drawable){
+    public Item(GameEngine gameEngine, int drawable) {
         super(gameEngine, drawable);
 
         start(gameEngine);
@@ -31,9 +30,9 @@ public abstract class Item extends Sprite {
 
     }
 
-    public void start(GameEngine gameEngine){
+    public void start(GameEngine gameEngine) {
 
-        positionX = rnd.nextInt( (int) Math.abs( (gameEngine.width *0.66)- imageWidth) );
+        positionX = rnd.nextInt((int) Math.abs((gameEngine.width * 0.66) - imageWidth));
 
         positionY = rnd.nextInt(Math.abs((gameEngine.height - imageHeight) - imageHeight));
     }

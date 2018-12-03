@@ -61,31 +61,32 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         final ViewTreeObserver observer = view.getViewTreeObserver();
 
 
-
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void onGlobalLayout(){
+            public void onGlobalLayout() {
                 //Para evitar que sea llamado múltiples veces,
                 //se elimina el listener en cuanto es llamado
                 observer.removeOnGlobalLayoutListener(this);
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
-                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 50,    R.drawable.back));
-                theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 100,    R.drawable.back3));
-               theGameEngine.addGameObject(  new ParallaxBackground(theGameEngine, 200,    R.drawable.back2));
 
+                //Creamos los fondos
+                theGameEngine.addGameObject(new ParallaxBackground(theGameEngine, 50, R.drawable.back));
+                theGameEngine.addGameObject(new ParallaxBackground(theGameEngine, 100, R.drawable.back3));
+                theGameEngine.addGameObject(new ParallaxBackground(theGameEngine, 200, R.drawable.back2));
 
+                // Creamos la nave
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, SettingsInfo.getInstance().getDrawableRes()));
 
-
                 theGameEngine.addGameObject(new ScoreCounter(theGameEngine));
-                //theGameEngine.addGameObject(new Enemy(theGameEngine));
+
                 theGameEngine.addGameObject(new EnemySpawner(theGameEngine));
+
                 theGameEngine.addGameObject(new LifeItem(theGameEngine));
                 theGameEngine.addGameObject(new TimeItem(theGameEngine));
                 theGameEngine.addGameObject(new AmmoItem(theGameEngine));
-                //asteroides();
+
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.startGame();
             }
@@ -94,12 +95,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
-    public void asteroides()
-    {
-        for(int i=0;i<5;i++) {
-            theGameEngine.addGameObject(new Asteroid(theGameEngine));
-        }
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -111,7 +107,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (theGameEngine.isRunning()){
+        if (theGameEngine.isRunning()) {
             pauseGameAndShowPauseDialog();
         }
     }
@@ -131,20 +127,19 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         return false;
     }
 
-    public void setPlayerImage( int drawableRes){
+    public void setPlayerImage(int drawableRes) {
         theGameEngine.getPlayer().setImage(theGameEngine, drawableRes);
     }
 
     //Vamos a la pantalla de final.
-    public void onGameFinished()
-    {
+    public void onGameFinished() {
         Intent intent = new Intent(getContext(), EndGame.class);
 
         //Mandamos mensaje de fin de partida, score y tiempo (estos dos ultimo son valores basura).
-        String[] finJuego = {"limbo","-99999","0"};
+        String[] finJuego = {"limbo", "-99999", "0"};
 
         //Mandamos el paquete
-        intent.putExtra("finJuego",finJuego);
+        intent.putExtra("finJuego", finJuego);
 
         startActivity(intent);
     }
@@ -168,7 +163,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         theGameEngine.stopGame();
-                        ((ScaffoldActivity)getActivity()).navigateBack();
+                        ((ScaffoldActivity) getActivity()).navigateBack();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -190,8 +185,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         if (theGameEngine.isPaused()) {
             theGameEngine.resumeGame();
             button.setText(R.string.pause);
-        }
-        else {
+        } else {
             theGameEngine.pauseGame();
             button.setText(R.string.resume);
         }

@@ -1,6 +1,5 @@
 package dadm.scaffold.space;
 
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Enemy extends Sprite {
 
     EnemySpawner parent;
 
-    public Enemy(GameEngine gameEngine){
+    public Enemy(GameEngine gameEngine) {
         super(gameEngine, R.drawable.small_ships);
 
         typeS = "enemy";
@@ -40,7 +39,7 @@ public class Enemy extends Sprite {
     }
 
     private void initBulletPool(GameEngine gameEngine) {
-        for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++) {
+        for (int i = 0; i < INITIAL_BULLET_POOL_AMOUNT; i++) {
             bullets.add(new BulletEnemy(gameEngine));
         }
     }
@@ -90,12 +89,12 @@ public class Enemy extends Sprite {
 
 
         //Si colisiona con una bala
-        if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
-            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.galaxy_3));
-            gameEngine.addGameObject(new Explosion(gameEngine,positionX- imageWidth/2,positionY- imageHeight/2, R.drawable.cinco));
-            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore()+5);
+        if (collider.typeS.equals("bullet") || collider.typeS.equals("player")) {
+            gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.galaxy_3));
+            gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.cinco));
+            gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore() + 5);
             parent.releaseEnemy(this);
-            gameEngine.setEnemiesKilled( gameEngine.getEnemiesKilled()+1);
+            gameEngine.setEnemiesKilled(gameEngine.getEnemiesKilled() + 1);
             gameEngine.removeGameObject(this);
         }
     }
@@ -107,11 +106,10 @@ public class Enemy extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX - imageWidth/2, positionY + imageWidth/2);
+            bullet.init(this, positionX - imageWidth / 2, positionY + imageWidth / 2);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
-        }
-        else {
+        } else {
             timeSinceLastFire += elapsedMillis;
         }
     }

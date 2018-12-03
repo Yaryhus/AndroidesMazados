@@ -15,9 +15,6 @@ public class SmartEnemy extends Sprite {
     List<SmartBullet> bullets = new ArrayList<SmartBullet>();
     private long timeSinceLastFire;
 
-    private int maxX;
-    private int maxY;
-    private double speedFactor;
 
     Random rnd = new Random();
 
@@ -30,7 +27,7 @@ public class SmartEnemy extends Sprite {
 
     EnemySpawner parent;
 
-    public SmartEnemy(GameEngine gameEngine){
+    public SmartEnemy(GameEngine gameEngine) {
         super(gameEngine, R.drawable.spaceship_enemy_red);
 
         typeS = "enemy";
@@ -39,7 +36,7 @@ public class SmartEnemy extends Sprite {
     }
 
     private void initBulletPool(GameEngine gameEngine) {
-        for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++) {
+        for (int i = 0; i < INITIAL_BULLET_POOL_AMOUNT; i++) {
             bullets.add(new SmartBullet(gameEngine));
         }
     }
@@ -64,7 +61,7 @@ public class SmartEnemy extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-      //  positionY += mSpeedY * elapsedMillis;
+        //  positionY += mSpeedY * elapsedMillis;
         positionX += mSpeedX * elapsedMillis;
 
         if (positionY < -imageHeight) {
@@ -89,8 +86,8 @@ public class SmartEnemy extends Sprite {
 
 
         //Si colisiona con una bala
-        if(collider.typeS.equals("bullet")||collider.typeS.equals("player")) {
-            if (HP == 2){
+        if (collider.typeS.equals("bullet") || collider.typeS.equals("player")) {
+            if (HP == 2) {
                 HP = 1;
             } else if (HP == 1) {
 
@@ -101,7 +98,7 @@ public class SmartEnemy extends Sprite {
 
 
                 gameEngine.getPlayer().setScore(gameEngine.getPlayer().getScore() + 10);
-                gameEngine.setEnemiesKilled( gameEngine.getEnemiesKilled()+1);
+                gameEngine.setEnemiesKilled(gameEngine.getEnemiesKilled() + 1);
                 parent.releaseSmartEnemy(this);
                 gameEngine.removeGameObject(this);
 
@@ -116,11 +113,10 @@ public class SmartEnemy extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX - imageWidth/2, positionY + imageWidth/2);
+            bullet.init(this, positionX - imageWidth / 2, positionY + imageWidth / 2);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
-        }
-        else {
+        } else {
             timeSinceLastFire += elapsedMillis;
         }
     }

@@ -7,7 +7,7 @@ import dadm.scaffold.engine.Sprite;
 
 public class TimeItem extends Item {
 
-    public TimeItem(GameEngine gameEngine){
+    public TimeItem(GameEngine gameEngine) {
         super(gameEngine, R.drawable.time);
 
         typeS = "time";
@@ -18,7 +18,7 @@ public class TimeItem extends Item {
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
         //Si colisiona con un jugador
-        if(collider.typeS.equals("player")) {
+        if (collider.typeS.equals("player")) {
             ((SpaceShipPlayer) collider).reduceTime();
             start(gameEngine);
         }

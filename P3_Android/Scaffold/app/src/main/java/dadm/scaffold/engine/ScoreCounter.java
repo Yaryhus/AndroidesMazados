@@ -28,7 +28,7 @@ public class ScoreCounter extends GameObject {
     public ScoreCounter(GameEngine gameEngine) {
         paint = new Paint();
         paint.setTextAlign(Paint.Align.LEFT);
-        textHeight = (float) (60* gameEngine.pixelFactor);
+        textHeight = (float) (60 * gameEngine.pixelFactor);
         textWidth = (float) (60 * gameEngine.pixelFactor);
         paint.setTextSize(textHeight);
         player = gameEngine.getPlayer();
@@ -44,13 +44,13 @@ public class ScoreCounter extends GameObject {
     //Recogemos y pintamos vida y puntuacion del jugador
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        HP=player.getHP();
-        score=player.getScore();
+        HP = player.getHP();
+        score = player.getScore();
         enemiesKilled = gameEngine.getEnemiesKilled();
-        ScoreText="Score: "+ (int)score;
-        HPText = "Lives: "+ (int)HP;
-        EnemiesText = "Kills: "+ (int)enemiesKilled;
-        BombsText = "Bombs: "+ (int)player.numberOfBombs;
+        ScoreText = "Score: " + (int) score;
+        HPText = "Lives: " + (int) HP;
+        EnemiesText = "Kills: " + (int) enemiesKilled;
+        BombsText = "Bombs: " + (int) player.numberOfBombs;
     }
 
     @Override
@@ -58,10 +58,10 @@ public class ScoreCounter extends GameObject {
         paint.setColor(Color.BLACK);
         //canvas.drawRect(0, 0, textWidth, textWidth, paint);
         paint.setColor(Color.WHITE);
-        canvas.drawText(HPText, textWidth/2, textHeight*1f, paint);
-        canvas.drawText(BombsText , textWidth/2, textHeight*2f, paint);
-        canvas.drawText(EnemiesText , textWidth/2, textHeight*3f, paint);
-        canvas.drawText(ScoreText, (float)width/2 - textWidth/2 , textHeight*1f, paint);
+        canvas.drawText(HPText, textWidth / 2, textHeight * 1f, paint);
+        canvas.drawText(BombsText, textWidth / 2, textHeight * 2f, paint);
+        canvas.drawText(EnemiesText, textWidth / 2, textHeight * 3f, paint);
+        canvas.drawText(ScoreText, (float) width / 2 - textWidth / 2, textHeight * 1f, paint);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class Explosion extends Sprite {
 
     private long timeSinceReduced;
 
-    public Explosion(GameEngine gameEngine, double x, double y, int drawable){
+    public Explosion(GameEngine gameEngine, double x, double y, int drawable) {
         super(gameEngine, drawable);
         typeS = "explosion";
         positionX = x;
@@ -21,27 +21,27 @@ public class Explosion extends Sprite {
     }
 
     @Override
-    public void startGame() {}
+    public void startGame() {
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
 
-        if(timeSinceReduced > TIME_REDUCED) {
+        if (timeSinceReduced > TIME_REDUCED) {
 
             gameEngine.removeGameObject(this);
 
 
-        } else{
+        } else {
             timeSinceReduced += elapsedMillis;
         }
     }
 
 
-
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
 
-        }
+    }
 
 }
 

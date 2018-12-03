@@ -48,7 +48,7 @@ public class DrawThread extends Thread {
             }
             if (elapsedMillis < 20) { // This is 50 fps
                 try {
-                    Thread.sleep(20-elapsedMillis);
+                    Thread.sleep(20 - elapsedMillis);
                 } catch (InterruptedException e) {
                     // We just continue
                 }

@@ -18,12 +18,10 @@ import dadm.scaffold.model.SettingsInfo;
 public class EndGame extends AppCompatActivity {
 
 
-    public int globalScore =0;
-    Button TryAgain,Exit;
-    TextView Score,EnemiesKilled,Best1,Best2,Best3,Best4,Best5;
+    public int globalScore = 0;
+    Button TryAgain, Exit;
+    TextView Score, EnemiesKilled, Best1, Best2, Best3, Best4, Best5;
     ImageView Titulo;
-
-
 
 
     @SuppressLint("SetTextI18n")
@@ -45,20 +43,16 @@ public class EndGame extends AppCompatActivity {
         String[] finJuego = intent.getStringArrayExtra("finJuego");
 
         //Ganado o perdido
-        if(finJuego[0].equals("true"))
-            Titulo.setImageResource( R.drawable.won);
+        if (finJuego[0].equals("true"))
+            Titulo.setImageResource(R.drawable.won);
         else
-            Titulo.setImageResource( R.drawable.lose);
+            Titulo.setImageResource(R.drawable.lose);
 
         //Score
-        globalScore= Integer.parseInt(finJuego[1]);
-        Score.setText("Your Score: "+finJuego[1]);
+        globalScore = Integer.parseInt(finJuego[1]);
+        Score.setText("Your Score: " + finJuego[1]);
 
-        EnemiesKilled.setText("Enemies Killed: "+ finJuego[2]);
-
-
-
-
+        EnemiesKilled.setText("Enemies Killed: " + finJuego[2]);
 
 
         //Botón Salir al Menú principal
@@ -75,9 +69,6 @@ public class EndGame extends AppCompatActivity {
 
 
     }
-
-
-
 
 
 }

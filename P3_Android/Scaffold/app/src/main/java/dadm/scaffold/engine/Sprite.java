@@ -27,7 +27,7 @@ public abstract class Sprite extends GameObject {
 
     private final Matrix matrix = new Matrix();
 
-    protected Sprite (GameEngine gameEngine, int drawableRes) {
+    protected Sprite(GameEngine gameEngine, int drawableRes) {
         Resources r = gameEngine.getContext().getResources();
         Drawable spriteDrawable = r.getDrawable(drawableRes);
 
@@ -47,31 +47,23 @@ public abstract class Sprite extends GameObject {
     public void onDraw(Canvas canvas) {
         if (positionX > canvas.getWidth()
                 || positionY > canvas.getHeight()
-                || positionX < - imageWidth
-                || positionY < - imageHeight) {
+                || positionX < -imageWidth
+                || positionY < -imageHeight) {
             return;
         }
 
-        this.col=new Rect((int)positionX,(int)positionY,(int)positionX+imageWidth,(int)positionY+imageHeight);
+        this.col = new Rect((int) positionX, (int) positionY, (int) positionX + imageWidth, (int) positionY + imageHeight);
 
-        /*
-        //Pintamos
-        if(col != null) {
-            Paint p = new Paint();
-            p.setColor(Color.GREEN);
-            canvas.drawRect(col, p);
-        }
-        */
 
         matrix.reset();
         matrix.postScale((float) pixelFactor, (float) pixelFactor);
         matrix.postTranslate((float) positionX, (float) positionY);
-        matrix.postRotate((float) rotation, (float) (positionX + imageWidth/2), (float) (positionY + imageHeight/2));
-        canvas.drawBitmap(bitmap,matrix,null);
+        matrix.postRotate((float) rotation, (float) (positionX + imageWidth / 2), (float) (positionY + imageHeight / 2));
+        canvas.drawBitmap(bitmap, matrix, null);
 
     }
 
-    public void setImage( GameEngine gameEngine, int drawableRes){
+    public void setImage(GameEngine gameEngine, int drawableRes) {
 
         Resources r = gameEngine.getContext().getResources();
         Drawable spriteDrawable = r.getDrawable(drawableRes);

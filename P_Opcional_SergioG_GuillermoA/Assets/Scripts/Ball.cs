@@ -11,14 +11,17 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 {
 
 
-    private TrackableBehaviour mTrackableBehaviour;
+   private TrackableBehaviour mTrackableBehaviour;
 
-    public GameObject Floor;
-    public GameObject Spawn;
+    GameObject Floor;
+    GameObject Point;
+    //public GameObject Spawn;
+
 
     public bool Scored = false;
 
     Vector3 savedBallposition;
+    Vector3 initialBallPosition;
     Rigidbody rb;
 
     // Use this for initialization
@@ -34,7 +37,10 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
         }
 
-        transform.position = Spawn.transform.position;
+        initialBallPosition = transform.localPosition;
+
+        Floor = GameObject.FindWithTag("Floor");
+        Point = GameObject.FindWithTag("Point");
 
     }
 
@@ -42,19 +48,37 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     void Update () {
 
         //Guardamos la posicion de la pelota
-        //savedBallposition = transform.position;
+        savedBallposition = transform.position;
 
         rb.velocity += new Vector3(0, -5, 0);
 
         //Si se saliese del mapa
-        if (transform.position.y < Floor.transform.position.y - 10)
+        
+        if (transform.localPosition.y < Floor.transform.localPosition.y - 10)
         {
-            transform.position = Spawn.transform.position;         
+            transform.localPosition = initialBallPosition;         
         }
+        
 
 
-		
-	}
+
+        /*
+             Vector3 VectorResult;
+
+        Plane plane = new Plane();
+
+        Debug.DrawRay(Floor.transform.position, Floor.transform.up * 100, Color.green);
+
+        
+
+        plane.SetNormalAndPosition(Floor.transform.up, Floor.transform.position);
+        if (!plane.SameSide(transform.position, Point.transform.position))
+        {
+           transform.localPosition = initialBallPosition;
+        }
+        */
+
+    }
 
     public void OnTrackableStateChanged(
               TrackableBehaviour.Status previousStatus,
@@ -70,12 +94,12 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     private void OnTrackingFound()
     {
         //La colocamos donde la recordamos por ultima vez
-        //transform.position = savedBallposition;
-        transform.position = Spawn.transform.position;
+        transform.position = savedBallposition;
+      //  transform.localPosition = initialBallPosition;
 
 
     }
-
+    /*
 
     public void resetBall()
     {
@@ -84,10 +108,19 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
         transform.position = Spawn.transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    */
+
+    private void OnTriggerEnter(Collider collision)
     {
 
         if (collision.gameObject.tag == "Exit")
+        {
             Scored = true;
+
+            gameObject.SetActive(false);
+
+        }
+
+
     }
 }

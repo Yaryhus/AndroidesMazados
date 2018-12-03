@@ -16,26 +16,23 @@ public class BulletEnemy extends Sprite {
 
     double speedX, speedY;
 
-    public BulletEnemy(GameEngine gameEngine){
+    public BulletEnemy(GameEngine gameEngine) {
         super(gameEngine, R.drawable.bullet_red);
         typeS = "bulletenemy";
 
 
-
         // They initialize in a [-30, 30] degrees angle
-        double angle = rnd.nextDouble()*3d*Math.PI/4d - 5d*Math.PI/4d;
+        double angle = rnd.nextDouble() * 3d * Math.PI / 4d - 5d * Math.PI / 4d;
         speedX = speedFactor * Math.cos(angle);
         speedY = speedFactor * Math.sin(angle);
-
-
-
 
 
         //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
     @Override
-    public void startGame() {}
+    public void startGame() {
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
@@ -61,7 +58,7 @@ public class BulletEnemy extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
-        if(collider.typeS.equals("player")||collider.typeS.equals("bullet")) {
+        if (collider.typeS.equals("player") || collider.typeS.equals("bullet")) {
             parent.releaseBullet(this);
             gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.explosion2));
             gameEngine.removeGameObject(this);
@@ -71,8 +68,8 @@ public class BulletEnemy extends Sprite {
 
 
     public void init(Enemy parentPlayer, double initPositionX, double initPositionY) {
-        positionX = initPositionX - imageWidth/2;
-        positionY = initPositionY - imageHeight/2;
+        positionX = initPositionX - imageWidth / 2;
+        positionY = initPositionY - imageHeight / 2;
         parent = parentPlayer;
     }
 }

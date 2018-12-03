@@ -3,10 +3,9 @@ package dadm.scaffold.engine;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Rect;
+
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 
 public class ParallaxBackground extends GameObject {
@@ -25,13 +24,8 @@ public class ParallaxBackground extends GameObject {
 
     double screenWidth;
 
-    double targetHeight;
 
     double positionY = 0;
-
-    Rect srcRect = new Rect();
-    Rect dstRect = new Rect();
-
 
 
     Matrix matrix;
@@ -45,32 +39,24 @@ public class ParallaxBackground extends GameObject {
         screenHeight = gameEngine.height;
         screenWidth = gameEngine.width;
 
-        int newWidth = gameEngine.width; //(int) Math.floor( ( (double) newHeight * (double) bitmap.getWidth()) / (double) bitmap.getHeight());
-        int newHeight =  (bitmap.getHeight()* newWidth) / bitmap.getWidth();
+        int newWidth = gameEngine.width;
+        int newHeight = (bitmap.getHeight() * newWidth) / bitmap.getWidth();
 
         //   h    -   w
         //   x   -   w'
 
 
-
         bitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
 
-       // imageHeight = spriteDrawable.getIntrinsicHeight() * pixelFactor;
-      //  imageWidth = spriteDrawable.getIntrinsicWidth() * pixelFactor;
 
-
-
-       imageHeight = newHeight;
+        imageHeight = newHeight;
         imageWidth = newWidth;
 
         positionY = imageWidth;
 
-       // targetHeight = Math.min(imageHeight, screenHeight);
 
-        // x    -  y
-        // xn   - yn
-         typeGO = "background";
-         matrix = new Matrix();
+        typeGO = "background";
+        matrix = new Matrix();
     }
 
     @Override
@@ -80,7 +66,7 @@ public class ParallaxBackground extends GameObject {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-         positionY -= speedY*elapsedMillis;
+        positionY -= speedY * elapsedMillis;
 
 
     }
@@ -89,26 +75,18 @@ public class ParallaxBackground extends GameObject {
     public void onDraw(Canvas canvas) {
 
 
-       // Log.i("Hola", "Hey  " + positionY);
-
-       // if (positionY > imageWidth) {
-
-            matrix.reset();
-       //     matrix.postScale((float) (pixelFactor),        (float) (pixelFactor));
-            matrix.postTranslate((float) (positionY - imageWidth), 0);
-            canvas.drawBitmap(bitmap, matrix, null);
-    //    }
         matrix.reset();
-     //   matrix.postScale((float) (pixelFactor),      (float) (pixelFactor));
-        matrix.postTranslate((float) positionY , 0);
+
+        matrix.postTranslate((float) (positionY - imageWidth), 0);
+        canvas.drawBitmap(bitmap, matrix, null);
+
+        matrix.reset();
+
+        matrix.postTranslate((float) positionY, 0);
         canvas.drawBitmap(bitmap, matrix, null);
         if (positionY < 0) {
             positionY = imageWidth;
         }
-
-
-
-
 
 
     }
@@ -118,38 +96,8 @@ public class ParallaxBackground extends GameObject {
 
     }
 
-/*
-    @Override
-    public void onDraw(Canvas canvas) {
 
-        if (positionY < screenWidth) {
-            srcRect.set((int) (-positionY/pixelFactor),      0,      (int) ((screenWidth - positionY)/pixelFactor),      (int) (targetHeight/pixelFactor));
-            dstRect.set(0,      0,      (int) screenWidth,      (int) targetHeight);
-
-            canvas.drawBitmap(bitmap, srcRect, dstRect, null);
-        }
-        else
-            {
-
-                srcRect.set(0,      0,      (int) ((screenWidth - positionY)/pixelFactor),      (int) (targetHeight / pixelFactor));
-                dstRect.set((int) positionY,      0,      (int) screenWidth,      (int) targetHeight);
-                canvas.drawBitmap(bitmap, srcRect, dstRect, null);
-                // We need to draw the previous block
-
-                srcRect.set(0,      (int) ((imageHeight - positionY) / pixelFactor),      (int) (targetWidth/pixelFactor),      (int) (imageHeight/pixelFactor));
-                dstRect.set(0,      0,      (int) targetWidth,      (int) positionY);
-                canvas.drawBitmap(bitmap, srcRect, dstRect, null);
-
-
-            }
-            if (positionY > screenWidth) {
-            positionY -= screenWidth;
-        }
-        }
-        */
-
-
-    }
+}
 
 
 

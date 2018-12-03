@@ -17,12 +17,11 @@ import dadm.scaffold.engine.Sprite;
 public class EnemySpawner extends GameObject {
 
 
-
     private static final int INITIAL_ENEMY_POOL_AMOUNT = 2;
 
     private static final int INITIAL_SMARTENEMY_POOL_AMOUNT = 1;
     private static long TIME_BETWEEN_ENEMIES = 2000;
- //  List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
+    //  List<BulletEnemy> bullets = new ArrayList<BulletEnemy>();
     private long timeSinceLastFire;
     int mEnemiesSpawned;
     int mCurrentMillis = 0;
@@ -32,25 +31,22 @@ public class EnemySpawner extends GameObject {
     List<Asteroid> asteroids = new ArrayList<Asteroid>();
     List<SmartEnemy> smartEnemies = new ArrayList<SmartEnemy>();
 
-    public EnemySpawner(GameEngine gameEngine){
-     //   super(gameEngine, R.drawable.ship);
-       // typeS = "none";
+    public EnemySpawner(GameEngine gameEngine) {
+        //   super(gameEngine, R.drawable.ship);
+        // typeS = "none";
 
-        for (int i=0; i<INITIAL_ENEMY_POOL_AMOUNT; i++) {
+        for (int i = 0; i < INITIAL_ENEMY_POOL_AMOUNT; i++) {
             enemies.add(new Enemy(gameEngine));
 
         }
 
-        for (int i=0; i<INITIAL_SMARTENEMY_POOL_AMOUNT; i++) {
+        for (int i = 0; i < INITIAL_SMARTENEMY_POOL_AMOUNT; i++) {
 
             asteroids.add(new Asteroid(gameEngine));
             smartEnemies.add(new SmartEnemy(gameEngine));
         }
 
     }
-
-
-
 
 
     void releaseEnemy(Enemy enemy) {
@@ -83,22 +79,19 @@ public class EnemySpawner extends GameObject {
         mCurrentMillis += elapsedMillis;
 
 
-
-
-            if(gameEngine.getPlayer().getScore() > 200 && createEnemies == false) {
-                for (int i = 0; i < 2; i++) {
-                    enemies.add(new Enemy(gameEngine));
-                    asteroids.add(new Asteroid(gameEngine));
-                    smartEnemies.add(new SmartEnemy(gameEngine));
-         //           gameEngine.addGameObject(  new ParallaxBackground(gameEngine, 300,    R.drawable.rampage));
-                }
-
-                gameEngine.addGameObject(  new ParallaxBackground(gameEngine, 300,    R.drawable.rampage));
-                createEnemies = true;
-                TIME_BETWEEN_ENEMIES = 100;
+        if (gameEngine.getPlayer().getScore() > 200 && createEnemies == false) {
+            for (int i = 0; i < 2; i++) {
+                enemies.add(new Enemy(gameEngine));
+                //asteroids.add(new Asteroid(gameEngine));
+                smartEnemies.add(new SmartEnemy(gameEngine));
             }
 
-        if(mCurrentMillis>TIME_BETWEEN_ENEMIES) {
+            gameEngine.addGameObject(new ParallaxBackground(gameEngine, 300, R.drawable.rampage));
+            createEnemies = true;
+            TIME_BETWEEN_ENEMIES = 100;
+        }
+
+        if (mCurrentMillis > TIME_BETWEEN_ENEMIES) {
 
             checkEnemies(elapsedMillis, gameEngine);
             checkAsteroids(elapsedMillis, gameEngine);
@@ -115,7 +108,7 @@ public class EnemySpawner extends GameObject {
         if (enemies.isEmpty()) {
             return;
         }
-       Enemy enemy = enemies.remove(0);
+        Enemy enemy = enemies.remove(0);
 
         enemy.init(this, gameEngine);
 

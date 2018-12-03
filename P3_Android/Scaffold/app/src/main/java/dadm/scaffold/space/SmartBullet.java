@@ -1,7 +1,5 @@
 package dadm.scaffold.space;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import dadm.scaffold.R;
@@ -20,19 +18,17 @@ public class SmartBullet extends Sprite {
 
     GameEngine gameEngine;
 
-    public SmartBullet(GameEngine gameEngine){
+    public SmartBullet(GameEngine gameEngine) {
         super(gameEngine, R.drawable.space_mine);
         typeS = "bulletenemy";
 
+        this.gameEngine = gameEngine;
 
-this.gameEngine = gameEngine;
-
-
-        //  speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
     @Override
-    public void startGame() {}
+    public void startGame() {
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
@@ -58,7 +54,7 @@ this.gameEngine = gameEngine;
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
-        if(collider.typeS.equals("player")||collider.typeS.equals("bullet")) {
+        if (collider.typeS.equals("player") || collider.typeS.equals("bullet")) {
             parent.releaseBullet(this);
             gameEngine.addGameObject(new Explosion(gameEngine, positionX - imageWidth / 2, positionY - imageHeight / 2, R.drawable.explosion2));
             gameEngine.removeGameObject(this);
@@ -69,18 +65,17 @@ this.gameEngine = gameEngine;
 
 
     public void init(SmartEnemy parentPlayer, double initPositionX, double initPositionY) {
-        positionX = initPositionX - imageWidth/2;
-        positionY = initPositionY - imageHeight/2;
+        positionX = initPositionX - imageWidth / 2;
+        positionY = initPositionY - imageHeight / 2;
 
 
         parent = parentPlayer;
 
         double angle = (double) Math.toDegrees(Math.atan2(gameEngine.getPlayer().getPositionY() - initPositionY, gameEngine.getPlayer().getPositionX() - initPositionX));
 
-        if(angle < 0){
+        if (angle < 0) {
             angle += 360;
         }
-
 
 
         speedX = speedFactor * Math.cos(Math.toRadians(angle));

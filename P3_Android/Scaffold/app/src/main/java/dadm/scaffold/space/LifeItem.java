@@ -8,7 +8,7 @@ import dadm.scaffold.engine.Sprite;
 public class LifeItem extends Item {
 
 
-    public LifeItem(GameEngine gameEngine){
+    public LifeItem(GameEngine gameEngine) {
         super(gameEngine, R.drawable.lifegen);
 
         typeS = "life";
@@ -17,19 +17,17 @@ public class LifeItem extends Item {
         start(gameEngine);
 
 
-
     }
 
 
     @Override
     public void onCollision(GameEngine gameEngine, Sprite collider) {
         //Si colisiona con un jugador
-        if(collider.typeS.equals("player")) {
+        if (collider.typeS.equals("player")) {
             ((SpaceShipPlayer) collider).HP = 10;
             start(gameEngine);
         }
     }
-
 
 
 }

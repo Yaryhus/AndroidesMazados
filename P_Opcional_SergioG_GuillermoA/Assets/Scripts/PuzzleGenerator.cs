@@ -7,12 +7,13 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 {
 
     public GameObject[] maps;
-    public GameObject ball;
 
 
-    private TrackableBehaviour mTrackableBehaviour;
+   // private TrackableBehaviour mTrackableBehaviour;
     GameObject ActualMap;
     GameObject OldMap;
+
+    int id = 0;
 
     Vector3 savedBallposition;
 
@@ -28,13 +29,19 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
         Debug.Log("Creando un mapa");
 
-            //Recuperamos la posicion de la bola
-            ball.transform.position = savedBallposition;
+        //Recuperamos la posicion de la bola
+        //    ball.transform.position = savedBallposition;
 
-            //Creamos mapa aleatorio
-            ActualMap = returnRandom();
-            Instantiate(ActualMap,this.transform);
-            ActualMap.SetActive(false);
+        //Creamos mapa aleatorio
+        //   ActualMap = returnRandom();
+
+
+        ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
+        ActualMap.transform.parent = gameObject.transform;
+        ActualMap.transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
+        ActualMap.transform.localPosition =new Vector3(0, 0.1728f, 0);
+            //  Instantiate(ActualMap,this.transform);
+        //    ActualMap.SetActive(false);
 
     }
 
@@ -43,21 +50,26 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
     {
 
         // Si la bola ha llegado a su meta
-        if (ball.transform.GetComponent<Ball>().Scored) {
-            ActualMap.SetActive(false);
-            //Creamos un mapa aleatorio y recargamos la pelota.
-            OldMap = ActualMap;
-            ActualMap = returnRandom();
-            //Hacemos invisible el mapa antiguo
-            OldMap.SetActive(false);
-            //Destroy(OldMap);
-            //Creamos mapa nuevo
-            //Instantiate(ActualMap,OldMap.transform.position,OldMap.transform.rotation,this.transform);
-            ActualMap.SetActive(true);
+        if (ActualMap.GetComponent<PuzzleManager>().lose == true)
+        {
+        
 
-            //Instantiate(ActualMap, this.transform);
-            //Reseteamos la bola
-            ball.transform.GetComponent<Ball>().resetBall();     
+            Destroy(ActualMap);
+
+            ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
+            ActualMap.transform.parent = gameObject.transform;
+            ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+            ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
+
+        } else if (ActualMap.GetComponent<PuzzleManager>().win == true) {
+            id++;
+
+            Destroy(ActualMap);
+
+           ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
+            ActualMap.transform.parent = gameObject.transform;
+            ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+            ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
         }
 		
 	}
