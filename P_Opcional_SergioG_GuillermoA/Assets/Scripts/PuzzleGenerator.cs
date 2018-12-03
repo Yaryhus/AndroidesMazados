@@ -36,13 +36,18 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         //   ActualMap = returnRandom();
 
 
-        ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
-        ActualMap.transform.parent = gameObject.transform;
-        ActualMap.transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
-        ActualMap.transform.localPosition =new Vector3(0, 0.1728f, 0);
             //  Instantiate(ActualMap,this.transform);
         //    ActualMap.SetActive(false);
 
+    }
+
+    public void init(int i)
+    {
+
+        ActualMap = Instantiate(maps[i], transform.position, transform.rotation);
+        ActualMap.transform.parent = gameObject.transform;
+        ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+        ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
     }
 
     // Update is called once per frame
@@ -50,26 +55,32 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
     {
 
         // Si la bola ha llegado a su meta
-        if (ActualMap.GetComponent<PuzzleManager>().lose == true)
+
+        if (ActualMap != null)
         {
-        
+            if (ActualMap.GetComponent<PuzzleManager>().lose == true)
+            {
 
-            Destroy(ActualMap);
 
-            ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
-            ActualMap.transform.parent = gameObject.transform;
-            ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
-            ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
+                Destroy(ActualMap);
 
-        } else if (ActualMap.GetComponent<PuzzleManager>().win == true) {
-            id++;
+                ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
+                ActualMap.transform.parent = gameObject.transform;
+                ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+                ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
 
-            Destroy(ActualMap);
+            }
+            else if (ActualMap.GetComponent<PuzzleManager>().win == true)
+            {
+                id++;
 
-           ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
-            ActualMap.transform.parent = gameObject.transform;
-            ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
-            ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
+                Destroy(ActualMap);
+
+                ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
+                ActualMap.transform.parent = gameObject.transform;
+                ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+                ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
+            }
         }
 		
 	}
@@ -108,8 +119,10 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
     public override void OnTrackingFound()
     {
         base.OnTrackingFound();
-
-        ActualMap.SetActive(true);
+        if (ActualMap != null)
+        {
+            ActualMap.SetActive(true);
+        }
         
     }
 

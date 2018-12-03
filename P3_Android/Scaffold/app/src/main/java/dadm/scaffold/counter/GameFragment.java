@@ -162,8 +162,16 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
                         theGameEngine.stopGame();
-                        ((ScaffoldActivity) getActivity()).navigateBack();
+
+                        Intent intent = new Intent(getContext(), ScaffoldActivity.class);
+
+
+                        startActivity(intent);
+
+                        getActivity().finish();
+
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {

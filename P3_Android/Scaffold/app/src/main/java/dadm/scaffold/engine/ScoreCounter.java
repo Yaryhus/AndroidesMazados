@@ -21,8 +21,8 @@ public class ScoreCounter extends GameObject {
     private String ScoreText = "";
     private String HPText = "";
     private SpaceShipPlayer player;
-    private String BombsText;
-    private String EnemiesText;
+    private String BombsText = "";
+    private String EnemiesText = "";
 
     //Inicializamos valores
     public ScoreCounter(GameEngine gameEngine) {

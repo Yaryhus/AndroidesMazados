@@ -64,6 +64,8 @@ public class EndGame extends AppCompatActivity {
                 Intent intent = new Intent(contexto, ScaffoldActivity.class);
 
                 startActivity(intent);
+
+                finish();
             }
         });
 
