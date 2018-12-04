@@ -1126,7 +1126,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: 'TrackMaterial
 
-    27294'
+    21714'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -2534,9 +2534,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maps:
-  - {fileID: 1738726853863776, guid: f0d1db13ebe9a8042bae02e33a75e5b0, type: 2}
-  - {fileID: 1189821905279966, guid: a4b12382a20c4394f97c2a9372a3cdc4, type: 2}
-  - {fileID: 1302144791242058, guid: cf98f82ef706d054496b4b8bf23cb7fa, type: 2}
+  - {fileID: 1482015752392742, guid: 018bbb3a42c14e248acf6691ef2f18c7, type: 2}
+  - {fileID: 1573872270944626, guid: 586dbc01b2fab0f4f8b73384c80c40ea, type: 2}
+  - {fileID: 1381882164281434, guid: dd7c39132a27b674ea3146547100be3c, type: 2}
+  - {fileID: 1015214649599270, guid: 29dbd1b3082c3e74eb8c792b18f1ffa8, type: 2}
+  - {fileID: 1600995421483614, guid: 1c56aedecb5145d40bccf8108311dbcd, type: 2}
+  - {fileID: 1253639962233074, guid: 5835329255daa5245a1f7223d53737e6, type: 2}
+  - {fileID: 1926714295969000, guid: 22786e975cf41674bb3d1cb8cce187ec, type: 2}
+  - {fileID: 1989851011288404, guid: 12eaac2387f224047b33c627256e57c7, type: 2}
   menuController: {fileID: 1899460774}
 --- !u!114 &667231201
 MonoBehaviour:
@@ -2564,7 +2569,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 667231196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 1.67, z: -6.88}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 923446666}
@@ -5470,23 +5475,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4729544770032654, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4729544770032654, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4729544770032654, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4729544770032654, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4229652662475784, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.92
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: 1449441143984872, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_Name
@@ -5514,15 +5519,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4025179584393512, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4025179584393512, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4025179584393512, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
       propertyPath: m_LocalScale.y
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4229652662475784, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4229652662475784, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5b4605785ef794199901d46e31e561, type: 2}
@@ -5729,7 +5742,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ImageTargetMesh27284
+  m_Name: ImageTargetMesh21704
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

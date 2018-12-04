@@ -48,7 +48,7 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         id = i;
         ActualMap = Instantiate(maps[i], transform.position, transform.rotation);
         ActualMap.transform.parent = gameObject.transform;
-        ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+        ActualMap.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
         ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
     }
 
