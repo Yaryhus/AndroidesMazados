@@ -6,11 +6,18 @@ public class MainMenuController : MonoBehaviour {
 
     // Use this for initialization
 
-    public GameObject generator;
+
     public GameObject button;
 
+    public GameObject selectLevelMenu;
 
-	void Start () {
+    public GameObject[] difficulties;
+
+    public GameObject dialog;
+
+    public PuzzleGenerator puzzleGenerator;
+
+    void Start () {
 
 
     }
@@ -21,10 +28,48 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 
-    public void PlayButton(int i)
+    public void PlayButton()
     {
-        generator.GetComponent<PuzzleGenerator>().init(i);
-        button.SetActive(false);
 
+        button.SetActive(false);
+        selectLevelMenu.SetActive(true);
+
+    }
+
+    public void selectLevel(int i)
+    {
+        selectLevelMenu.SetActive(false);
+        puzzleGenerator.init(i);
+        
+
+    }
+
+    public void nextButton(int id)
+    {
+        for (int i = 0; i< difficulties.Length; i++)
+        {
+            difficulties[i].SetActive(false);
+        }
+
+        difficulties[id].SetActive(true);
+    }
+
+
+    public void repeatButton()
+    {
+        puzzleGenerator.repeatLevel();
+        dialog.SetActive(false);
+    }
+
+    public void nextLevelButton()
+    {
+        puzzleGenerator.nextLevel();
+        dialog.SetActive(false);
+    }
+
+    public void home()
+    {
+        dialog.SetActive(false);
+        button.SetActive(true);
     }
 }

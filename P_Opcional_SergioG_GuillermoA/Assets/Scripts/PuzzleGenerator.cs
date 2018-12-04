@@ -17,6 +17,8 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
     Vector3 savedBallposition;
 
+    public MainMenuController menuController;
+
 	// Use this for initialization
 	void Start () {
 
@@ -43,11 +45,24 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
     public void init(int i)
     {
-
+        id = i;
         ActualMap = Instantiate(maps[i], transform.position, transform.rotation);
         ActualMap.transform.parent = gameObject.transform;
         ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
         ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
+    }
+
+    public void nextLevel()
+    {
+        id++;
+ 
+        init(id);
+    }
+
+    public void repeatLevel()
+    {
+
+        init(id);
     }
 
     // Update is called once per frame
@@ -60,26 +75,16 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         {
             if (ActualMap.GetComponent<PuzzleManager>().lose == true)
             {
-
-
                 Destroy(ActualMap);
+                menuController.dialog.SetActive(true);
 
-                ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
-                ActualMap.transform.parent = gameObject.transform;
-                ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
-                ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
 
             }
             else if (ActualMap.GetComponent<PuzzleManager>().win == true)
             {
-                id++;
-
                 Destroy(ActualMap);
+                menuController.dialog.SetActive(true);
 
-                ActualMap = Instantiate(maps[id], transform.position, transform.rotation);
-                ActualMap.transform.parent = gameObject.transform;
-                ActualMap.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
-                ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
             }
         }
 		
@@ -136,6 +141,7 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         return maps[i];
 
     }
+
 
 
 }
