@@ -10,17 +10,24 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
 
    // private TrackableBehaviour mTrackableBehaviour;
-    GameObject ActualMap;
+  public   GameObject ActualMap;
     GameObject OldMap;
 
-    int id = 0;
+    public int id = 0;
 
     Vector3 savedBallposition;
 
     public MainMenuController menuController;
 
+    public int level;
+
 	// Use this for initialization
 	void Start () {
+
+        SaveGame.Load();
+        //Debug.Log(SaveGame.Instance.Level);
+        level = SaveGame.Instance.Level;
+
 
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 
@@ -45,6 +52,8 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
     public void init(int i)
     {
+
+
         id = i;
         ActualMap = Instantiate(maps[i], transform.position, transform.rotation);
         ActualMap.transform.parent = gameObject.transform;
@@ -54,6 +63,7 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
     public void nextLevel()
     {
+        Destroy(ActualMap);
         id++;
  
         init(id);
@@ -61,7 +71,7 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
 
     public void repeatLevel()
     {
-
+        Destroy(ActualMap);
         init(id);
     }
 
@@ -75,15 +85,21 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         {
             if (ActualMap.GetComponent<PuzzleManager>().lose == true)
             {
+                menuController.lose();
                 Destroy(ActualMap);
-                menuController.dialog.SetActive(true);
-
 
             }
             else if (ActualMap.GetComponent<PuzzleManager>().win == true)
             {
+                if (id == level) {
+                    level++;
+                    SaveGame.Instance.Level = level;
+                
+                    SaveGame.Save();
+                }
+
+                menuController.win();
                 Destroy(ActualMap);
-                menuController.dialog.SetActive(true);
 
             }
         }
