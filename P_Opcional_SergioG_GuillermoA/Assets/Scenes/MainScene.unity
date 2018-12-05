@@ -1126,7 +1126,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: 'TrackMaterial
 
-    21714'
+    12492'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -2542,6 +2542,14 @@ MonoBehaviour:
   - {fileID: 1253639962233074, guid: 5835329255daa5245a1f7223d53737e6, type: 2}
   - {fileID: 1926714295969000, guid: 22786e975cf41674bb3d1cb8cce187ec, type: 2}
   - {fileID: 1989851011288404, guid: 12eaac2387f224047b33c627256e57c7, type: 2}
+  - {fileID: 1162524957593206, guid: 1b81dcb05c06784478df3b0ad9557505, type: 2}
+  - {fileID: 1758486034332096, guid: 48a45dc61547f464c94aa3c0022759b9, type: 2}
+  - {fileID: 1104457646271212, guid: 56562e9c9aa3bc44eb6b6d7e13826c4e, type: 2}
+  - {fileID: 1776546671130096, guid: 7154020f93332984890a2dba2ace7e4f, type: 2}
+  - {fileID: 1603128790973230, guid: c52cf7eefb9fd6b429a53ec580be2acc, type: 2}
+  - {fileID: 1365021854128152, guid: ee0328b52c3adc34a92cff37a641815b, type: 2}
+  - {fileID: 1354607448882448, guid: a8014a2317bfb544c8957b8a6db9ac28, type: 2}
+  - {fileID: 1381092950739616, guid: 07c5844e565331d47b93500c51cdd3b2, type: 2}
   menuController: {fileID: 1899460774}
 --- !u!114 &667231201
 MonoBehaviour:
@@ -2751,6 +2759,7 @@ GameObject:
   - component: {fileID: 853552444}
   - component: {fileID: 853552443}
   - component: {fileID: 853552448}
+  - component: {fileID: 853552449}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: Untagged
@@ -2851,6 +2860,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de24bc9672163ad48876de28bf541cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &853552449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853552442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cf61fabed5af14bb865c6baa6332a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &859462723
@@ -5742,7 +5762,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ImageTargetMesh21704
+  m_Name: ImageTargetMesh12482
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
