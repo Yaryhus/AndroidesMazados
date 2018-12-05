@@ -4,7 +4,7 @@ using UnityEngine;
 using Vuforia;
 
 
-
+[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
 
 public class Ball : MonoBehaviour, ITrackableEventHandler
@@ -16,7 +16,8 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
     GameObject Floor;
     GameObject Point;
     //public GameObject Spawn;
-
+    private bool collided = false;
+    public AudioSource source;
 
     public bool Scored = false;
 
@@ -26,6 +27,8 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
     // Use this for initialization
     void Start () {
+
+        source = this.GetComponent<AudioSource>();
 
         //Aumentamos la velocidad de caida de la ficha.
         rb=this.GetComponent<Rigidbody>();
@@ -110,11 +113,43 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
     */
 
+    
+        //Pruebas
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        StartCoroutine(esperaVibrate());
+        collided = false;
+    }
+
+    IEnumerator esperaVibrate()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
+    */
+
     private void OnTriggerEnter(Collider collision)
     {
 
+        if (collided == false)
+        {
+            if (collision.gameObject.CompareTag("Choque"))
+            {
+                collided = true;
+                source.Play();
+                Vibration.Vibrate(50);
+            }
+            collided = false;
+        }
+
         if (collision.gameObject.tag == "Exit")
         {
+            Vibration.Vibrate(300);
             Scored = true;
 
             gameObject.SetActive(false);
