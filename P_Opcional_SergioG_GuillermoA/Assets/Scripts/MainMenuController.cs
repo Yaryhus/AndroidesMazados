@@ -199,7 +199,10 @@ public class MainMenuController : MonoBehaviour {
         SaveGame.Instance.Level = 0;
         SaveGame.Save();
         puzzleGenerator.level = 0;
-        PlayButton();
+        //PlayButton();
+
+        gameMode.SetActive(true);
+        selectLevelMenu.SetActive(false);
 
         playClickSound();
 
