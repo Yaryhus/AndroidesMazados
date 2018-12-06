@@ -17,6 +17,7 @@ public static class Vibration
 
     public static void Vibrate()
     {
+
         if (isAndroid())
             vibrator.Call("vibrate");
         else

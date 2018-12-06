@@ -4,9 +4,11 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
 public class MainMenuController : MonoBehaviour {
 
     // Use this for initialization
+
 
 
     public GameObject button;
@@ -56,9 +58,16 @@ public class MainMenuController : MonoBehaviour {
 
     public AutoFocus autofocus;
 
+    [Header("Audio")]
+    public AudioClip winSound;
+    public AudioClip loseSound;
+    public AudioClip spawnSound;
+    public AudioClip buttonSound;
+    public AudioSource source;
+
     void Start () {
 
-
+        source = this.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -72,6 +81,7 @@ public class MainMenuController : MonoBehaviour {
         button.SetActive(false);
         gameMode.SetActive(true);
 
+        playClickSound();
 
 
     }
@@ -95,6 +105,9 @@ public class MainMenuController : MonoBehaviour {
         rotation.setGameMode(id);
         gameMode.SetActive(false);
         selectLevelMenu.SetActive(true);
+
+        playClickSound();
+
     }
     public void selectLevel(int i)
     {
@@ -104,7 +117,10 @@ public class MainMenuController : MonoBehaviour {
         selectLevelMenu.SetActive(false);
         inGame.SetActive(true);
         puzzleGenerator.init(i);
-        
+
+        playClickSound();
+
+
 
     }
 
@@ -116,6 +132,9 @@ public class MainMenuController : MonoBehaviour {
         }
 
         difficulties[id].SetActive(true);
+
+        playClickSound();
+
     }
 
 
@@ -124,6 +143,10 @@ public class MainMenuController : MonoBehaviour {
         puzzleGenerator.repeatLevel();
         dialog.SetActive(false);
         inGame.SetActive(true);
+
+        playClickSound();
+
+
     }
 
     public void nextLevelButton()
@@ -131,6 +154,9 @@ public class MainMenuController : MonoBehaviour {
         puzzleGenerator.nextLevel();
         dialog.SetActive(false);
         inGame.SetActive(true);
+
+        playClickSound();
+
     }
 
     public void home()
@@ -139,6 +165,9 @@ public class MainMenuController : MonoBehaviour {
         inGame.SetActive(false);
         dialog.SetActive(false);
         button.SetActive(true);
+
+        playClickSound();
+
     }
 
     internal void lose()
@@ -147,6 +176,10 @@ public class MainMenuController : MonoBehaviour {
         inGame.SetActive(false);
         next.SetActive(false);
         message.GetComponent<Text>().text = "You lose!";
+        //Paramos todo audio anterior
+        source.Stop();
+        //reproducimos derrota
+        source.PlayOneShot(loseSound);
     }
 
     public void pause()
@@ -157,6 +190,8 @@ public class MainMenuController : MonoBehaviour {
         Destroy(puzzleGenerator.ActualMap);
         // if(puzzleGenerator.level>= puzzleGenerator.id)
         next.SetActive(false);
+
+        playClickSound();
     }
 
     public void erase()
@@ -165,6 +200,9 @@ public class MainMenuController : MonoBehaviour {
         SaveGame.Save();
         puzzleGenerator.level = 0;
         PlayButton();
+
+        playClickSound();
+
     }
 
     internal void win()
@@ -173,10 +211,19 @@ public class MainMenuController : MonoBehaviour {
         dialog.SetActive(true);
         inGame.SetActive(false);
         message.GetComponent<Text>().text = "You win";
+
+        //Paramos todo audio anterior
+        source.Stop();
+        //reproducimos victoria
+        source.PlayOneShot(winSound);
+
     }
 
     public void SwitchSettings()
     {
+        playClickSound();
+
+
         if (settingsEnabled)
         {
             settingsEnabled = false;
@@ -198,11 +245,14 @@ public class MainMenuController : MonoBehaviour {
         {
             soundEnabled = false;
             sound.GetComponent<Image>().sprite = soundDisabledSprite;
+            source.volume = 0;
         }
         else
         {
             soundEnabled = true;
             sound.GetComponent<Image>().sprite = soundEnabledSprite;
+            source.volume = 1;
+
         }
     }
 
@@ -212,11 +262,14 @@ public class MainMenuController : MonoBehaviour {
         {
             vibrationEnabled = false;
             vibration.GetComponent<Image>().sprite = vibrationDisabledSprite;
+            playClickSound();
         }
         else
         {
             vibrationEnabled = true;
             vibration.GetComponent<Image>().sprite = vibrationEnabledSprite;
+            playClickSound();
+
         }
     }
 
@@ -227,12 +280,24 @@ public class MainMenuController : MonoBehaviour {
             autofocus.switchCameraFocus();
             batterySaverEnabled = false;
             battery.GetComponent<Image>().sprite = batterySaverEnabledSprite;
+            playClickSound();
+
         }
         else
         {
             autofocus.switchCameraFocus();
             batterySaverEnabled = true;
             battery.GetComponent<Image>().sprite = batterySaverDisabledSprite;
+            playClickSound();
+
         }
+    }
+
+    void playClickSound()
+    {
+        //Paramos todo audio anterior
+        //source.Stop();
+        //reproducimos victoria
+        source.PlayOneShot(buttonSound);
     }
 }
