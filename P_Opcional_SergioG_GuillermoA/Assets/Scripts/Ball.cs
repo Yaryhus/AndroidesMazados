@@ -113,26 +113,6 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
     */
 
-    
-        //Pruebas
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        StartCoroutine(esperaVibrate());
-        collided = false;
-    }
-
-    IEnumerator esperaVibrate()
-    {
-        yield return new WaitForSeconds(1.0f);
-    }
-    */
-
     private void OnTriggerEnter(Collider collision)
     {
 
