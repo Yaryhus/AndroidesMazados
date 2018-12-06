@@ -19,13 +19,42 @@ public class MainMenuController : MonoBehaviour {
 
     public GameObject dialog;
 
+    public GameObject gameMode;
+    public CamaraRotator rotation;
+
     public GameObject inGame;
 
     public GameObject next;
 
     public GameObject message;
 
+    public GameObject settings;
+
+    public GameObject sound;
+
+    public Boolean soundEnabled = true;
+
+    public GameObject vibration;
+
+    public Boolean vibrationEnabled = true;
+
+    public GameObject battery;
+
+    public Boolean batterySaverEnabled = false;
+
     public PuzzleGenerator puzzleGenerator;
+
+    public Sprite soundEnabledSprite;
+    public Sprite soundDisabledSprite;
+
+    public Sprite vibrationEnabledSprite;
+    public Sprite vibrationDisabledSprite;
+
+    public Sprite batterySaverEnabledSprite;
+    public Sprite batterySaverDisabledSprite;
+    private bool settingsEnabled = false;
+
+    public AutoFocus autofocus;
 
     void Start () {
 
@@ -40,26 +69,33 @@ public class MainMenuController : MonoBehaviour {
 
     public void PlayButton()
     {
-        for (int j = 0; j < levels.Length; j++)
-        {
-            levels[j].GetComponent<Button>().interactable = true;
-            levels[j].transform.GetChild(0).gameObject.SetActive(true);
-    
-        }
-
-        for (int j = puzzleGenerator.level+1; j < levels.Length; j++)
-        {
-            levels[j].GetComponent<Button>().interactable = false;
-            levels[j].transform.GetChild(0).gameObject.SetActive(false);
-            Debug.Log("HOLA");
-        }
         button.SetActive(false);
-        selectLevelMenu.SetActive(true);
+        gameMode.SetActive(true);
 
 
 
     }
 
+    public void selectGameMode(int id)
+    {
+        for (int j = 0; j < levels.Length; j++)
+        {
+            levels[j].GetComponent<Button>().interactable = true;
+            levels[j].transform.GetChild(0).gameObject.SetActive(true);
+
+        }
+
+        for (int j = puzzleGenerator.level + 1; j < levels.Length; j++)
+        {
+            levels[j].GetComponent<Button>().interactable = false;
+            levels[j].transform.GetChild(0).gameObject.SetActive(false);
+            Debug.Log("HOLA");
+        }
+
+        rotation.setGameMode(id);
+        gameMode.SetActive(false);
+        selectLevelMenu.SetActive(true);
+    }
     public void selectLevel(int i)
     {
 
@@ -137,5 +173,66 @@ public class MainMenuController : MonoBehaviour {
         dialog.SetActive(true);
         inGame.SetActive(false);
         message.GetComponent<Text>().text = "You win";
+    }
+
+    public void SwitchSettings()
+    {
+        if (settingsEnabled)
+        {
+            settingsEnabled = false;
+            sound.SetActive(false);
+            vibration.SetActive(false);
+            battery.SetActive(false);
+        } else
+        {
+            settingsEnabled = true;
+            sound.SetActive(true);
+            vibration.SetActive(true);
+            battery.SetActive(true);
+        }
+    }
+
+    public void switchSound()
+    {
+        if (soundEnabled)
+        {
+            soundEnabled = false;
+            sound.GetComponent<Image>().sprite = soundDisabledSprite;
+        }
+        else
+        {
+            soundEnabled = true;
+            sound.GetComponent<Image>().sprite = soundEnabledSprite;
+        }
+    }
+
+    public void switchVibration()
+    {
+        if (vibrationEnabled)
+        {
+            vibrationEnabled = false;
+            vibration.GetComponent<Image>().sprite = vibrationDisabledSprite;
+        }
+        else
+        {
+            vibrationEnabled = true;
+            vibration.GetComponent<Image>().sprite = vibrationEnabledSprite;
+        }
+    }
+
+    public void switchBattery()
+    {
+        if (batterySaverEnabled)
+        {
+            autofocus.switchCameraFocus();
+            batterySaverEnabled = false;
+            battery.GetComponent<Image>().sprite = batterySaverEnabledSprite;
+        }
+        else
+        {
+            autofocus.switchCameraFocus();
+            batterySaverEnabled = true;
+            battery.GetComponent<Image>().sprite = batterySaverDisabledSprite;
+        }
     }
 }

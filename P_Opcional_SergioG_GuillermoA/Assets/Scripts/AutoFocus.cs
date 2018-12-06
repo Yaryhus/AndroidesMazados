@@ -5,7 +5,7 @@ using Vuforia;
 
 public class AutoFocus : MonoBehaviour
 {
-
+    bool autoFocusEnabled = true;
 
     void Start()
     {
@@ -24,9 +24,33 @@ public class AutoFocus : MonoBehaviour
     {
         if (!paused) // resumed
         {
-            // Set again autofocus mode when app is resumed
-            CameraDevice.Instance.SetFocusMode(
+            if (autoFocusEnabled)
+            {
+                // Set again autofocus mode when app is resumed
+                CameraDevice.Instance.SetFocusMode(
                CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
+            }
+            else
+            {
+                CameraDevice.Instance.SetFocusMode(
+   CameraDevice.FocusMode.FOCUS_MODE_NORMAL);
+            }
+        }
+    }
+
+    public void switchCameraFocus()
+    {
+        if (autoFocusEnabled)
+        {
+            autoFocusEnabled = false;
+        CameraDevice.Instance.SetFocusMode(
+           CameraDevice.FocusMode.FOCUS_MODE_NORMAL);
+        }
+        else
+        {
+            autoFocusEnabled = true;
+            CameraDevice.Instance.SetFocusMode(
+              CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
         }
     }
 }

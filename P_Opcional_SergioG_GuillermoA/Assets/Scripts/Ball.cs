@@ -15,6 +15,11 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
     GameObject Floor;
     GameObject Point;
+
+    MainMenuController menuController;
+
+
+
     //public GameObject Spawn;
     private bool collided = false;
     public AudioSource source;
@@ -30,8 +35,11 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
 
         source = this.GetComponent<AudioSource>();
 
+        menuController = GameObject.Find("MainMenuController").GetComponent<MainMenuController>();
+
+
         //Aumentamos la velocidad de caida de la ficha.
-        rb=this.GetComponent<Rigidbody>();
+        rb =this.GetComponent<Rigidbody>();
 
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 
@@ -121,15 +129,21 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
             if (collision.gameObject.CompareTag("Choque"))
             {
                 collided = true;
-                source.Play();
-                Vibration.Vibrate(50);
+
+                if (menuController.soundEnabled)               
+                    source.Play();
+
+                if (menuController.vibrationEnabled)
+                    Vibration.Vibrate(50);
             }
             collided = false;
         }
 
         if (collision.gameObject.tag == "Exit")
         {
-            Vibration.Vibrate(300);
+            if (menuController.vibrationEnabled)
+                Vibration.Vibrate(300);
+
             Scored = true;
 
             gameObject.SetActive(false);
