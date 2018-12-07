@@ -143,6 +143,8 @@ public class Ball : MonoBehaviour, ITrackableEventHandler
         {
             if (menuController.vibrationEnabled)
                 Vibration.Vibrate(300);
+            //Sonido de inserción de bola
+            menuController.source.PlayOneShot(menuController.ballInSound);
 
             Scored = true;
 

@@ -59,11 +59,6 @@ public class PuzzleGenerator : DefaultTrackableEventHandler
         ActualMap.transform.parent = gameObject.transform;
         ActualMap.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
         ActualMap.transform.localPosition = new Vector3(0, 0.1728f, 0);
-
-        //Paramos todo audio anterior
-        menuController.source.Stop();
-        //Sonido de crear nivel
-        menuController.source.PlayOneShot(menuController.spawnSound);
         
     }
 

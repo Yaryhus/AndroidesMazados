@@ -63,6 +63,7 @@ public class MainMenuController : MonoBehaviour {
     public AudioClip loseSound;
     public AudioClip spawnSound;
     public AudioClip buttonSound;
+    public AudioClip ballInSound;
     public AudioSource source;
 
     void Start () {
@@ -92,14 +93,13 @@ public class MainMenuController : MonoBehaviour {
         {
             levels[j].GetComponent<Button>().interactable = true;
             levels[j].transform.GetChild(0).gameObject.SetActive(true);
-
         }
 
         for (int j = puzzleGenerator.level + 1; j < levels.Length; j++)
         {
             levels[j].GetComponent<Button>().interactable = false;
             levels[j].transform.GetChild(0).gameObject.SetActive(false);
-            Debug.Log("HOLA");
+            //Debug.Log("HOLA");
         }
 
         rotation.setGameMode(id);
@@ -109,10 +109,9 @@ public class MainMenuController : MonoBehaviour {
         playClickSound();
 
     }
+    //Selecciona el nivel desde el menú
     public void selectLevel(int i)
     {
-
-      
 
         selectLevelMenu.SetActive(false);
         inGame.SetActive(true);
@@ -120,10 +119,18 @@ public class MainMenuController : MonoBehaviour {
 
         playClickSound();
 
+        //Paramos todo audio anterior
+        source.Stop();
+        //Sonido de crear nivel
+        source.PlayOneShot(spawnSound);
 
-
+        //Pausa de 3 segundos para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
+        Time.timeScale = 0;
+        StartCoroutine(pauseStart(3));
+        
     }
 
+    //Siguiente pagina de niveles
     public void nextButton(int id)
     {
         for (int i = 0; i< difficulties.Length; i++)
@@ -137,7 +144,7 @@ public class MainMenuController : MonoBehaviour {
 
     }
 
-
+    //Repetir el nivel
     public void repeatButton()
     {
         puzzleGenerator.repeatLevel();
@@ -146,9 +153,12 @@ public class MainMenuController : MonoBehaviour {
 
         playClickSound();
 
-
+        //Pausa de 1 segundo para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
+        Time.timeScale = 0;
+        StartCoroutine(pauseStart(1));
     }
 
+    //Siguiente nivel al completar uno
     public void nextLevelButton()
     {
         puzzleGenerator.nextLevel();
@@ -157,8 +167,18 @@ public class MainMenuController : MonoBehaviour {
 
         playClickSound();
 
+        //Paramos todo audio anterior
+        source.Stop();
+        //Sonido de crear nivel
+        source.PlayOneShot(spawnSound);
+
+        //Pausa de 3 segundos para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
+        Time.timeScale = 0;
+        StartCoroutine(pauseStart(3));
+
     }
 
+    //Volver al menu ppal
     public void home()
     {
         //Destroy(puzzleGenerator.ActualMap);
@@ -170,6 +190,7 @@ public class MainMenuController : MonoBehaviour {
 
     }
 
+    //Perder la partida
     internal void lose()
     {
         dialog.SetActive(true);
@@ -182,6 +203,7 @@ public class MainMenuController : MonoBehaviour {
         source.PlayOneShot(loseSound);
     }
 
+    //Pausar la partida
     public void pause()
     {
         inGame.SetActive(false);
@@ -194,6 +216,7 @@ public class MainMenuController : MonoBehaviour {
         playClickSound();
     }
 
+    //Borrar el progreso
     public void erase()
     {
         SaveGame.Instance.Level = 0;
@@ -207,7 +230,7 @@ public class MainMenuController : MonoBehaviour {
         playClickSound();
 
     }
-
+    //Ganar la partida
     internal void win()
     {
         next.SetActive(true);
@@ -222,6 +245,7 @@ public class MainMenuController : MonoBehaviour {
 
     }
 
+    //Desplegable de Opciones
     public void SwitchSettings()
     {
         playClickSound();
@@ -241,7 +265,7 @@ public class MainMenuController : MonoBehaviour {
             battery.SetActive(true);
         }
     }
-
+    //Sonido on/off
     public void switchSound()
     {
         if (soundEnabled)
@@ -259,6 +283,7 @@ public class MainMenuController : MonoBehaviour {
         }
     }
 
+    //Vibracion on/off
     public void switchVibration()
     {
         if (vibrationEnabled)
@@ -276,6 +301,7 @@ public class MainMenuController : MonoBehaviour {
         }
     }
 
+    //Modo ahorro de bateria on/off (camerafocus)
     public void switchBattery()
     {
         if (batterySaverEnabled)
@@ -296,11 +322,18 @@ public class MainMenuController : MonoBehaviour {
         }
     }
 
+    //Boton jugar
     void playClickSound()
     {
         //Paramos todo audio anterior
         //source.Stop();
         //reproducimos victoria
         source.PlayOneShot(buttonSound);
+    }
+
+    private IEnumerator pauseStart(int time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Time.timeScale = 1;
     }
 }
