@@ -33,7 +33,7 @@ public class AutoFocus : MonoBehaviour
             else
             {
                 CameraDevice.Instance.SetFocusMode(
-   CameraDevice.FocusMode.FOCUS_MODE_NORMAL);
+                CameraDevice.FocusMode.FOCUS_MODE_INFINITY);
             }
         }
     }
@@ -44,7 +44,7 @@ public class AutoFocus : MonoBehaviour
         {
             autoFocusEnabled = false;
         CameraDevice.Instance.SetFocusMode(
-           CameraDevice.FocusMode.FOCUS_MODE_NORMAL);
+           CameraDevice.FocusMode.FOCUS_MODE_INFINITY);
         }
         else
         {

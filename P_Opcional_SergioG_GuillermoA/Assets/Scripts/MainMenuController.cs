@@ -175,7 +175,7 @@ public class MainMenuController : MonoBehaviour {
         dialog.SetActive(true);
         inGame.SetActive(false);
         next.SetActive(false);
-        message.GetComponent<Text>().text = "You lose!";
+        message.GetComponent<Text>().text = "YOU LOSE";
         //Paramos todo audio anterior
         source.Stop();
         //reproducimos derrota
@@ -186,7 +186,7 @@ public class MainMenuController : MonoBehaviour {
     {
         inGame.SetActive(false);
         dialog.SetActive(true);
-        message.GetComponent<Text>().text = "Pause menu";
+        message.GetComponent<Text>().text = "PAUSE MENU";
         Destroy(puzzleGenerator.ActualMap);
         // if(puzzleGenerator.level>= puzzleGenerator.id)
         next.SetActive(false);
@@ -213,7 +213,7 @@ public class MainMenuController : MonoBehaviour {
         next.SetActive(true);
         dialog.SetActive(true);
         inGame.SetActive(false);
-        message.GetComponent<Text>().text = "You win";
+        message.GetComponent<Text>().text = "YOU WIN";
 
         //Paramos todo audio anterior
         source.Stop();
