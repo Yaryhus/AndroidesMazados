@@ -65,6 +65,7 @@ public class MainMenuController : MonoBehaviour {
     public AudioClip buttonSound;
     public AudioClip ballInSound;
     public AudioSource source;
+    public GameObject getReady;
 
     void Start () {
 
@@ -123,11 +124,11 @@ public class MainMenuController : MonoBehaviour {
         source.Stop();
         //Sonido de crear nivel
         source.PlayOneShot(spawnSound);
-
+        getReady.SetActive(true);
         //Pausa de 3 segundos para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
         Time.timeScale = 0;
         StartCoroutine(pauseStart(3));
-        
+        //getReady.SetActive(false);
     }
 
     //Siguiente pagina de niveles
@@ -152,10 +153,11 @@ public class MainMenuController : MonoBehaviour {
         inGame.SetActive(true);
 
         playClickSound();
-
+        getReady.SetActive(true);
         //Pausa de 1 segundo para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
         Time.timeScale = 0;
         StartCoroutine(pauseStart(1));
+       // getReady.SetActive(false);
     }
 
     //Siguiente nivel al completar uno
@@ -172,9 +174,13 @@ public class MainMenuController : MonoBehaviour {
         //Sonido de crear nivel
         source.PlayOneShot(spawnSound);
 
+
+        getReady.SetActive(true);
+
         //Pausa de 3 segundos para que el jugador pueda ver el escenario antes de que empiece la gravedad a hacer efecto
         Time.timeScale = 0;
         StartCoroutine(pauseStart(3));
+       // getReady.SetActive(false);
 
     }
 
@@ -335,5 +341,6 @@ public class MainMenuController : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(time);
         Time.timeScale = 1;
+        getReady.SetActive(false);
     }
 }
