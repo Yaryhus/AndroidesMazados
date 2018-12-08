@@ -236,6 +236,19 @@ public class MainMenuController : MonoBehaviour {
         playClickSound();
 
     }
+
+
+
+    //Volver atrás
+    public void back()
+    {
+
+        gameMode.SetActive(true);
+        selectLevelMenu.SetActive(false);
+
+        playClickSound();
+
+    }
     //Ganar la partida
     internal void win()
     {
