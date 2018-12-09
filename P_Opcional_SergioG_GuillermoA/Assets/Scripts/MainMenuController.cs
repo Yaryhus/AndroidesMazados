@@ -202,7 +202,7 @@ public class MainMenuController : MonoBehaviour {
         dialog.SetActive(true);
         inGame.SetActive(false);
         next.SetActive(false);
-        message.GetComponent<Text>().text = "YOU LOSE";
+        message.GetComponent<Text>().text = "LEVEL FAILED";
         //Paramos todo audio anterior
         source.Stop();
         //reproducimos derrota
@@ -255,7 +255,7 @@ public class MainMenuController : MonoBehaviour {
         next.SetActive(true);
         dialog.SetActive(true);
         inGame.SetActive(false);
-        message.GetComponent<Text>().text = "YOU WIN";
+        message.GetComponent<Text>().text = "LEVEL COMPLETED";
 
         //Paramos todo audio anterior
         source.Stop();
